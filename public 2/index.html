@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Frankenstein, El moderno prometeo</title>
+
+    <!-- PWA & Mobile App Settings -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#2d2622">
+    <link rel="apple-touch-icon" href="images/frankenstein_icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/frankenstein_icon.png">
+</head>
+<body class="theme-light">
+
+    <div id="app-container">
+        <header id="app-header">
+            <h1 id="main-title">Frankenstein</h1>
+            <div id="settings-controls">
+                <button id="fullscreen-btn" aria-label="Toggle Fullscreen">⛶</button>
+                <button id="settings-toggle" aria-label="Toggle Settings">⚙️</button>
+                <div id="settings-menu">
+                    <button id="decrease-font">A-</button>
+                    <button id="increase-font">A+</button>
+                    <button id="theme-selector">🎨</button>
+                    <button id="mute-btn">Silenciar</button>
+                </div>
+            </div>
+        </header>
+
+        <main id="book-container">
+            <div id="book">
+                <div id="page-flipper">
+                    <div id="page-front" class="page-face"></div>
+                    <div id="page-back" class="page-face"></div>
+                </div>
+            </div>
+        </main>
+
+        <nav id="navigation">
+            <button id="prev-btn" disabled>Anterior</button>
+            <button id="next-btn" disabled>Siguiente</button>
+        </nav>
+
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
