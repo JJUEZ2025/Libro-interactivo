@@ -227,6 +227,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             setTimeout(() => {
                 isTransitioning = false;
                 updateUI();
+                if (document.activeElement) document.activeElement.blur(); // FIX: Remove focus from tapped button on mobile
             }, 50);
 
         }, 300);
