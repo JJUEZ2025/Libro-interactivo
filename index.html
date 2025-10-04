@@ -11,44 +11,62 @@
     <link rel="apple-touch-icon" href="images/frankenstein_icon.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="stylesheet" href="https://unpkg.com/page-flip/dist/css/page-flip.css">
-<script defer src="https://unpkg.com/page-flip/dist/js/page-flip.browser.min.js"></script>
+
+    <!-- Librería de efecto de hoja -->
+    <link rel="stylesheet" href="https://unpkg.com/page-flip/dist/css/page-flip.css">
+    <script defer src="https://unpkg.com/page-flip/dist/js/page-flip.browser.min.js"></script>
+
+    <!-- Tus estilos -->
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="images/frankenstein_icon.png">
 </head>
 <body class="theme-light">
+    <noscript>Para leer este libro necesitas activar JavaScript.</noscript>
 
     <div id="app-container">
         <header id="app-header">
             <h1 id="main-title">Frankenstein</h1>
-            <div id="settings-controls">
-                <button id="fullscreen-btn" aria-label="Toggle Fullscreen">⛶</button>
-                <button id="settings-toggle" aria-label="Toggle Settings">⚙️</button>
-                <div id="settings-menu">
-                    <button id="decrease-font">A-</button>
-                    <button id="increase-font">A+</button>
-                    <button id="theme-selector">🎨</button>
-                    <button id="mute-btn">Silenciar</button>
+            <div id="settings-controls" role="group" aria-label="Ajustes de lectura">
+                <button id="fullscreen-btn" aria-label="Pantalla completa">⛶</button>
+                <button id="settings-toggle" aria-label="Mostrar u ocultar ajustes">⚙️</button>
+                <div id="settings-menu" hidden>
+                    <button id="decrease-font" aria-label="Disminuir tamaño de letra">A-</button>
+                    <button id="increase-font" aria-label="Aumentar tamaño de letra">A+</button>
+                    <button id="theme-selector" aria-label="Cambiar tema">🎨</button>
+                    <button id="mute-btn" aria-label="Silenciar o activar sonido">Silenciar</button>
                 </div>
             </div>
         </header>
 
+        <!-- CONTENEDOR DEL LIBRO -->
         <main id="book-container">
-            <div id="book">
-                <div id="page-flipper">
-                    <div id="page-front" class="page-face"></div>
-                    <div id="page-back" class="page-face"></div>
-                </div>
+            <!-- IMPORTANTE:
+                 Reemplacé tu estructura anterior (#page-flipper/#page-front/#page-back)
+                 por un contenedor "flipbook" donde St.PageFlip dibuja las páginas.
+            -->
+            <div id="book" aria-label="Libro interactivo">
+                <div id="flipbook" class="pageflip-book" aria-live="polite"></div>
             </div>
         </main>
 
-        <nav id="navigation">
-            <button id="prev-btn" disabled>Anterior</button>
-            <button id="next-btn" disabled>Siguiente</button>
+        <!-- NAVEGACIÓN -->
+        <nav id="navigation" aria-label="Navegación del libro">
+            <button id="prev-btn" aria-label="Página anterior" disabled>Anterior</button>
+            <span id="progress" aria-live="polite" style="min-width:140px;text-align:center;display:inline-block">Página 1 / 1</span>
+            <button id="next-btn" aria-label="Página siguiente" disabled>Siguiente</button>
         </nav>
-
     </div>
 
+    <!-- Tu lógica -->
     <script src="main.js"></script>
+
+    <!--
+        NOTAS PARA TU main.js (no necesitas pegarlas ahora, es solo guía):
+        - Selecciona #flipbook para inicializar St.PageFlip.
+        - Crea una "página" por cada capítulo de tu story.json, como elementos <div class="page">.
+        - Llama a pageFlip.loadFromHTML(pagesArray) y conecta prev/next con #prev-btn / #next-btn.
+        - Actualiza #progress en el evento "flip".
+        - Guarda/restaura la página actual en localStorage si quieres.
+    -->
 </body>
 </html>
