@@ -342,3 +342,7 @@ body, html {
     scroll-behavior: auto !important;
   }
 }
+#progress,
+.page-number { 
+  display: none !important; 
+}
