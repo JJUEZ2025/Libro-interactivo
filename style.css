@@ -232,20 +232,14 @@ body, html {
 #app-footer {
     width: 100%;
     max-width: 800px;
-    margin-top: 2rem; /* Space between book and footer */
-    opacity: 0.5; /* Start semi-transparent */
-    transition: opacity 0.3s ease; /* Smooth transition */
-}
-
-#app-footer:hover {
-    opacity: 1; /* Become fully visible on hover */
+    margin-top: 2rem;
 }
 
 #navigation {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-top: 1rem; /* Space between progress bar and buttons */
+    margin-top: 1rem; 
 }
 
 #navigation button {
@@ -257,20 +251,24 @@ body, html {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px var(--shadow-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     min-width: 100px;
+    opacity: 0.4; /* More opaque resting state */
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #navigation button:hover:not(:disabled) {
+    opacity: 1; /* Fully visible on hover */
     transform: translateY(-2px);
     box-shadow: 0 6px 12px var(--shadow-color);
 }
 
 #navigation button:disabled {
     background-color: #555;
-    opacity: 0.5;
+    opacity: 0.3;
     cursor: not-allowed;
+    transform: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .choices {
@@ -369,6 +367,12 @@ body, html {
     background-color: rgba(0, 0, 0, 0.08);
     border-radius: 1px;
     overflow: hidden;
+    opacity: 0.4; /* Match button opacity */
+    transition: opacity 0.3s ease;
+}
+
+#progress-bar-container:hover {
+    opacity: 1; /* Fully visible on hover */
 }
 
 #progress-bar {
