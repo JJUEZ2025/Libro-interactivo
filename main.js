@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     // Elements
     const book = document.getElementById('book');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
     const increaseFontBtn = document.getElementById('increase-font');
     const decreaseFontBtn = document.getElementById('decrease-font');
     const themeSelectorBtn = document.getElementById('theme-selector');
@@ -144,11 +142,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- UI Updates & Controls ---
     function updateUI() {
-        const pageData = story.find(p => p.id === currentStoryId);
-        const hasSingleChoice = pageData && pageData.choices && pageData.choices.length === 1;
-        
-        prevBtn.disabled = pageHistory.length <= 1 || isTransitioning;
-        nextBtn.disabled = !hasSingleChoice || isTransitioning;
         updateProgressBar();
     }
 
@@ -227,7 +220,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             setTimeout(() => {
                 isTransitioning = false;
                 updateUI();
-                if (document.activeElement) document.activeElement.blur(); // FIX: Remove focus from tapped button on mobile
+                if (document.activeElement) document.activeElement.blur();
             }, 50);
 
         }, 300);
@@ -261,8 +254,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // --- Event Listeners ---
-    prevBtn.addEventListener('click', goBack);
-    nextBtn.addEventListener('click', goForward);
     increaseFontBtn.addEventListener('click', () => changeFontSize(0.1));
     decreaseFontBtn.addEventListener('click', () => changeFontSize(-0.1));
     themeSelectorBtn.addEventListener('click', cycleTheme);
