@@ -1,7 +1,5 @@
-
 document.addEventListener('DOMContentLoaded', async () => {
     // Elements
-    const bookContainer = document.getElementById('book-container');
     const book = document.getElementById('book');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
@@ -12,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const settingsMenu = document.getElementById('settings-menu');
     const fullscreenBtn = document.getElementById('fullscreen-btn');
     const muteBtn = document.getElementById('mute-btn');
+    const progressBar = document.getElementById('progress-bar');
 
     // State
     let story;
@@ -23,6 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let isTransitioning = false;
     let currentAudio = null;
     let isMuted = false;
+    let totalPagesInStory = 0;
 
     // --- Preferences Handling ---
     function loadPreferences() {
@@ -40,7 +40,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         if (savedMuteState) {
             isMuted = JSON.parse(savedMuteState);
-            muteBtn.textContent = isMuted ? "Activar Sonido" : "Silenciar";
+            const unmutedSvg = muteBtn.querySelector('.unmuted');
+            const mutedSvg = muteBtn.querySelector('.muted');
+            if (unmutedSvg && mutedSvg) {
+                unmutedSvg.style.display = isMuted ? 'none' : 'inline-block';
+                mutedSvg.style.display = isMuted ? 'inline-block' : 'none';
+            }
+            muteBtn.setAttribute('aria-label', isMuted ? 'Activar Sonido' : 'Silenciar Audio');
         }
     }
 
@@ -60,6 +66,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const response = await fetch('story.json');
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             story = await response.json();
+            totalPagesInStory = story.length; 
         } catch (error) {
             console.error('Error loading the story:', error);
             book.innerHTML = '<div class="page-content"><p>Error al cargar la historia. Por favor, intente de nuevo más tarde.</p></div>';
@@ -89,7 +96,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- Rendering ---
     function renderPage(pageId) {
-        book.innerHTML = ''; // Clear the book container
+        book.innerHTML = ''; 
 
         const pageData = story.find(p => p.id === pageId);
         if (!pageData) {
@@ -110,7 +117,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         pageContent.innerHTML = contentHtml;
 
-        if (pageData.choices && pageData.choices.length > 0) {
+        if (pageData.choices && pageData.choices.length > 1) {
             const choicesDiv = document.createElement('div');
             choicesDiv.className = 'choices';
             pageData.choices.forEach(choice => {
@@ -136,10 +143,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // --- UI Updates & Controls ---
-    function updateButtons() {
-        prevBtn.disabled = pageHistory.length <= 1 || isTransitioning;
+    function updateUI() {
         const pageData = story.find(p => p.id === currentStoryId);
-        nextBtn.disabled = !pageData || !pageData.choices || pageData.choices.length === 0 || isTransitioning;
+        const hasSingleChoice = pageData && pageData.choices && pageData.choices.length === 1;
+        
+        prevBtn.disabled = pageHistory.length <= 1 || isTransitioning;
+        nextBtn.disabled = !hasSingleChoice || isTransitioning;
+        updateProgressBar();
+    }
+
+    function updateProgressBar() {
+        if (totalPagesInStory === 0) {
+            progressBar.style.width = '0%';
+            return;
+        }
+        const uniqueVisitedPages = new Set(pageHistory);
+        const progress = (uniqueVisitedPages.size / totalPagesInStory) * 100;
+        progressBar.style.width = `${progress}%`;
     }
 
     function changeFontSize(amount) {
@@ -167,7 +187,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function toggleMute() {
         isMuted = !isMuted;
-        muteBtn.textContent = isMuted ? "Activar Sonido" : "Silenciar";
+        const unmutedSvg = muteBtn.querySelector('.unmuted');
+        const mutedSvg = muteBtn.querySelector('.muted');
+        if (unmutedSvg && mutedSvg) {
+            unmutedSvg.style.display = isMuted ? 'none' : 'inline-block';
+            mutedSvg.style.display = isMuted ? 'inline-block' : 'none';
+        }
+        muteBtn.setAttribute('aria-label', isMuted ? 'Activar Sonido' : 'Silenciar Audio');
         saveMuteState();
         if (isMuted) {
             stopCurrentAudio();
@@ -178,10 +204,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- Navigation ---
     function goToPage(pageId, isGoingBack = false) {
-        if (isTransitioning || !story.some(p => p.id === pageId)) return;
+        if (!story.some(p => p.id === pageId) || isTransitioning) return;
 
         isTransitioning = true;
-        updateButtons();
         book.classList.add('loading');
 
         setTimeout(() => {
@@ -201,27 +226,28 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             setTimeout(() => {
                 isTransitioning = false;
-                updateButtons();
-            }, 50); // Small delay to ensure rendering is complete
+                updateUI();
+            }, 50);
 
-        }, 300); // Corresponds to transition duration
+        }, 300);
     }
 
     function goBack() {
-        if (pageHistory.length > 1 && !isTransitioning) {
-            goToPage(pageHistory[pageHistory.length - 2], true);
-        }
+        if (isTransitioning || pageHistory.length <= 1) return;
+        goToPage(pageHistory[pageHistory.length - 2], true);
     }
 
     function goForward() {
+        if (isTransitioning) return;
+
         const pageData = story.find(p => p.id === currentStoryId);
-        if (pageData && pageData.choices && pageData.choices.length > 0 && !isTransitioning) {
+        if (pageData && pageData.choices && pageData.choices.length === 1) {
             goToPage(pageData.choices[0].page);
         }
     }
 
     function handleBookClick(event) {
-        if (event.target.closest('.choices')) return;
+        if (isTransitioning || event.target.closest('.choices')) return;
 
         const bookRect = book.getBoundingClientRect();
         const clickX = event.clientX - bookRect.left;
@@ -263,7 +289,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             renderPage(currentStoryId);
             playPageSound(currentStoryId);
-            updateButtons();
+            updateUI();
             window.scrollTo(0, 0);
         }
     }
