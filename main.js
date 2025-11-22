@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log("Iniciando Libro Interactivo - Versión Final Restaurada");
+    console.log("Iniciando Libro Interactivo - Versión Hitos e Imágenes");
 
     // Elements
     const book = document.getElementById('book');
@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const muteBtn = document.getElementById('mute-btn');
     const progressBar = document.getElementById('progress-bar');
     
-    // NUEVOS ELEMENTOS DE NAVEGACIÓN
     const navToggle = document.getElementById('nav-toggle');
     const navModal = document.getElementById('nav-modal');
     const navClose = document.getElementById('nav-close');
@@ -25,10 +24,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     let currentStoryId = -1;
     let pageHistory = [];
     let fontSize = 1.1;
-    
     const themes = ['light', 'sepia', 'bone', 'dark'];
     let currentThemeIndex = 0;
-    
     let isTransitioning = false;
     let currentAudio = null;
     let isMuted = false;
@@ -44,14 +41,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             fontSize = parseFloat(savedFontSize);
             document.documentElement.style.setProperty('--font-size-dynamic', `${fontSize}rem`);
         }
-        
         if (savedTheme && themes.includes(savedTheme)) {
             currentThemeIndex = themes.indexOf(savedTheme);
             applyTheme(savedTheme);
         } else {
             applyTheme('light'); 
         }
-
         if (savedMuteState) {
             isMuted = JSON.parse(savedMuteState);
             updateMuteIcon();
@@ -62,13 +57,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     function saveTheme() { localStorage.setItem('theme', themes[currentThemeIndex]); }
     function savePageHistory() { localStorage.setItem('frankestein-pageHistory', JSON.stringify(pageHistory)); }
     function saveMuteState() { localStorage.setItem('isMuted', isMuted); }
-
     function loadPageHistory() {
         const savedHistory = localStorage.getItem('frankestein-pageHistory');
         return savedHistory ? JSON.parse(savedHistory) : null;
     }
 
-    // --- Theme Logic ---
     function applyTheme(themeName) {
         document.body.classList.remove('theme-light', 'theme-sepia', 'theme-bone', 'theme-dark');
         document.body.classList.add(`theme-${themeName}`);
@@ -84,50 +77,60 @@ document.addEventListener('DOMContentLoaded', async () => {
         muteBtn.setAttribute('aria-label', isMuted ? 'Activar Sonido' : 'Silenciar Audio');
     }
 
-    // --- NAVEGACIÓN INTELIGENTE (MENÚ) ---
+    // --- NAVEGACIÓN FILTRADA (SOLO HITOS) ---
     function openNav() {
         updateNavigationList();
         navModal.classList.add('active');
     }
-
-    function closeNav() {
-        navModal.classList.remove('active');
-    }
+    function closeNav() { navModal.classList.remove('active'); }
 
     function updateNavigationList() {
         historyList.innerHTML = '';
-        const recentHistory = pageHistory.slice().reverse().slice(0, 20);
+        
+        // Filtramos el historial para mostrar SOLO:
+        // 1. El inicio (primera página)
+        // 2. Bifurcaciones (páginas con > 1 opción)
+        const milestones = pageHistory.filter((pageId, index) => {
+            if (index === 0) return true; // Siempre mostrar inicio
+            const pageData = story.find(p => p.id === pageId);
+            // Mostrar si tiene más de 1 opción (es una decisión)
+            return pageData && pageData.choices && pageData.choices.length > 1;
+        });
 
-        recentHistory.forEach((pageId) => {
+        // Invertir para ver lo más reciente arriba
+        const recentMilestones = milestones.reverse();
+
+        recentMilestones.forEach((pageId) => {
             const pageData = story.find(p => p.id === pageId);
             if (!pageData) return;
 
             const li = document.createElement('li');
-            li.className = 'history-item';
-            if (pageId === currentStoryId) li.classList.add('active');
+            li.className = 'history-item decision'; // Estilo destacado siempre
 
-            const isDecision = pageData.choices && pageData.choices.length > 1;
-            if (isDecision) li.classList.add('decision');
-
-            let title = `Página ${pageData.page !== undefined ? pageData.page : pageId}`;
+            let title = (pageHistory.indexOf(pageId) === 0) ? "Inicio" : "Punto de Decisión";
+            
+            // Preview del texto
             let preview = "";
             if (pageData.scenes && pageData.scenes.length > 0) {
                 const cleanText = pageData.scenes[0].replace(/<[^>]*>?/gm, '');
                 preview = cleanText.substring(0, 50) + "...";
             }
 
-            let htmlContent = `<span class="history-title">${title}`;
-            if (isDecision) htmlContent += `<span class="history-tag">Decisión</span>`;
-            htmlContent += `</span>`;
-            if (preview) htmlContent += `<span class="history-preview">${preview}</span>`;
+            li.innerHTML = `
+                <span class="history-title">${title} <span class="history-tag">Volver aquí</span></span>
+                <span class="history-preview">${preview}</span>
+            `;
 
-            li.innerHTML = htmlContent;
             li.addEventListener('click', () => {
                 jumpToHistoryPoint(pageId);
                 closeNav();
             });
             historyList.appendChild(li);
         });
+        
+        if(recentMilestones.length === 0) {
+            historyList.innerHTML = '<li class="history-item"><span class="history-preview">Avanza en la historia para ver puntos clave.</span></li>';
+        }
     }
 
     function jumpToHistoryPoint(targetId) {
@@ -135,20 +138,38 @@ document.addEventListener('DOMContentLoaded', async () => {
         const targetIndex = pageHistory.indexOf(targetId);
         if (targetIndex !== -1) {
             pageHistory = pageHistory.slice(0, targetIndex + 1);
-            goToPage(targetId);
+            goToPage(targetId, true);
         }
     }
 
     function restartStory() {
-        if(confirm("¿Seguro que quieres reiniciar la historia?")) {
+        if(confirm("¿Reiniciar historia?")) {
             const startId = story[0].id;
             pageHistory = [startId];
-            goToPage(startId);
+            goToPage(startId, true);
             closeNav();
         }
     }
 
-    // --- Core Logic ---
+    // --- PRE-CARGA DE IMÁGENES (Solución carga lenta) ---
+    function preloadNextImages(currentPageId) {
+        const currentPage = story.find(p => p.id === currentPageId);
+        if (!currentPage || !currentPage.choices) return;
+
+        // Buscamos todas las páginas a las que podemos ir desde aquí
+        currentPage.choices.forEach(choice => {
+            const nextPage = story.find(p => p.id === choice.page);
+            if (nextPage && nextPage.images && nextPage.images.length > 0) {
+                // Pre-cargamos cada imagen
+                nextPage.images.forEach(imgUrl => {
+                    const img = new Image();
+                    img.src = imgUrl;
+                    // No necesitamos hacer nada con 'img', el navegador la cacheará
+                });
+            }
+        });
+    }
+
     async function loadStory() {
         try {
             const response = await fetch('story.json');
@@ -156,35 +177,30 @@ document.addEventListener('DOMContentLoaded', async () => {
             story = await response.json();
             totalPagesInStory = story.length; 
         } catch (error) {
-            console.error('Error loading story:', error);
-            pageWrapper.innerHTML = '<div class="page-content"><p>Error al cargar la historia.</p></div>';
+            console.error('Error:', error);
+            pageWrapper.innerHTML = '<div class="page-content"><p>Error al cargar historia.</p></div>';
         }
     }
     
     function stopCurrentAudio() {
         if (currentAudio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-            currentAudio = null;
+            currentAudio.pause(); currentAudio.currentTime = 0; currentAudio = null;
         }
     }
 
     function playPageSound(pageId) {
         stopCurrentAudio();
         if (isMuted) return;
-
         const pageData = story.find(p => p.id === pageId);
         if (pageData && pageData.sound) {
             currentAudio = new Audio(`sounds/${pageData.sound}`);
             currentAudio.loop = true;
-            currentAudio.play().catch(e => console.error("Audio error:", e));
+            currentAudio.play().catch(e => console.error("Audio:", e));
         }
     }
 
-    // --- RENDERIZADO CON CENTRADO ---
     function renderPage(pageId) {
         pageWrapper.innerHTML = ''; 
-
         const pageData = story.find(p => p.id === pageId);
         if (!pageData) {
             pageWrapper.innerHTML = '<div class="page-content"><p>Página no encontrada.</p></div>';
@@ -193,14 +209,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const pageContent = document.createElement('div');
         pageContent.className = 'page-content';
-
-        // Contenedor de centrado
         const contentCenterer = document.createElement('div');
         contentCenterer.className = 'content-centerer';
 
         let contentHtml = '';
         if (pageData.images && pageData.images.length > 0) {
-            contentHtml += `<div class="images-container">${pageData.images.map(url => `<img src="${url}" alt="Ilustración">`).join('')}</div>`;
+            // Añadimos loading="eager" para la imagen actual
+            contentHtml += `<div class="images-container">${pageData.images.map(url => `<img src="${url}" alt="Ilustración" loading="eager">`).join('')}</div>`;
         }
         if (pageData.scenes && pageData.scenes.length > 0) {
             const scenesHtml = pageData.scenes.map(s => `<p>${s.replace(/\n/g, '</p><p>')}</p>`).join('');
@@ -233,13 +248,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             pageNumberDiv.textContent = `Página ${pageData.page}`;
             pageContent.appendChild(pageNumberDiv);
         }
+
+        // ¡Lanzamos la precarga de las siguientes imágenes!
+        preloadNextImages(pageId);
     }
 
     function updateUI() {
-        if (totalPagesInStory === 0) {
-            progressBar.style.width = '0%';
-            return;
-        }
+        if (totalPagesInStory === 0) { progressBar.style.width = '0%'; return; }
         const uniqueVisitedPages = new Set(pageHistory);
         const progress = (uniqueVisitedPages.size / totalPagesInStory) * 100;
         progressBar.style.width = `${progress}%`;
@@ -259,69 +274,51 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     function toggleSettingsMenu() { settingsMenu.classList.toggle('visible'); }
-
     function toggleFullscreen() {
         if (!document.fullscreenElement) {
             document.documentElement.requestFullscreen().catch(err => console.error(err));
-        } else {
-            document.exitFullscreen();
-        }
+        } else { document.exitFullscreen(); }
     }
-
     function toggleMute() {
-        isMuted = !isMuted;
-        updateMuteIcon();
-        saveMuteState();
-        if (isMuted) stopCurrentAudio();
-        else playPageSound(currentStoryId);
+        isMuted = !isMuted; updateMuteIcon(); saveMuteState();
+        if (isMuted) stopCurrentAudio(); else playPageSound(currentStoryId);
     }
 
-    // --- TRANSICIÓN RÁPIDA ---
     function goToPage(pageId, isGoingBack = false) {
         if (!story.some(p => p.id === pageId) || isTransitioning) return;
-
         isTransitioning = true;
-
-        // 1. SALIDA
         pageWrapper.classList.remove('page-enter');
         pageWrapper.classList.add('page-exit');
 
-        // 2. ESPERA CORTE (400ms)
         setTimeout(() => {
             renderPage(pageId);
-            
             const contentDiv = pageWrapper.querySelector('.page-content');
             if (contentDiv) contentDiv.scrollTop = 0;
             
             currentStoryId = pageId;
             
-            // Historial
             if (!pageHistory.includes(pageId) && !isGoingBack) {
                  pageHistory.push(pageId);
             } else if (isGoingBack) {
-                 pageHistory.pop();
+                 // Si estamos volviendo, no hacemos push, asumimos que el historial ya se ajustó
             }
             
             savePageHistory();
             playPageSound(pageId);
 
-            // 3. ENTRADA
             pageWrapper.classList.remove('page-exit');
             void pageWrapper.offsetWidth; 
             pageWrapper.classList.add('page-enter');
 
-            // 4. FIN (500ms)
-            setTimeout(() => {
-                isTransitioning = false;
-                updateUI();
-            }, 500); 
-
+            setTimeout(() => { isTransitioning = false; updateUI(); }, 500); 
         }, 400); 
     }
 
     function goBack() {
         if (isTransitioning || pageHistory.length <= 1) return;
-        goToPage(pageHistory[pageHistory.length - 2], true);
+        pageHistory.pop();
+        const previousPageId = pageHistory[pageHistory.length - 1];
+        goToPage(previousPageId, true);
     }
 
     function goForward() {
@@ -336,8 +333,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (isTransitioning || event.target.closest('.choices') || event.target.closest('button')) return;
         const bookRect = book.getBoundingClientRect();
         const clickX = event.clientX - bookRect.left;
-        if (clickX < bookRect.width * 0.3) goBack();
-        else goForward();
+        if (clickX < bookRect.width * 0.3) goBack(); else goForward();
     }
 
     navToggle.addEventListener('click', openNav);
