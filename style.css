@@ -33,6 +33,7 @@ body, html {
     font-family: var(--font-body); color: var(--text-color);
     transition: background-color 0.5s ease, color 0.5s ease;
     overflow-x: hidden; 
+    overscroll-behavior: none; 
 }
 
 #app-container {
@@ -40,6 +41,7 @@ body, html {
     display: flex; flex-direction: column;
     padding: 20px; box-sizing: border-box;
     align-items: center; height: 100dvh; 
+    min-height: 100%;
 }
 
 #app-header {
@@ -126,22 +128,20 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
 
 .page-content p { 
     margin-bottom: 1.5rem; 
-    text-indent: 2rem; /* Sangría normal para PC */
+    text-indent: 2rem; 
     text-align: justify; 
 }
 
-/* --- MEJORA DE IMÁGENES --- */
+/* --- IMÁGENES --- */
 .page-content img {
     max-width: 100%; 
-    /* Limitamos la altura para que no ocupen toda la pantalla en móviles */
-    max-height: 60vh; 
-    width: auto; /* Mantiene proporción */
+    max-height: 65vh; 
+    width: auto; 
     border-radius: 2px;
-    margin: 1.5rem auto; 
-    display: block; /* Centrado en bloque */
+    margin: 2rem auto; 
+    display: block; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
     filter: sepia(15%);
-    /* Asegura que no se deforme */
     object-fit: contain; 
 }
 
@@ -198,7 +198,7 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
 #history-list::before { content: ''; position: absolute; top: 0; bottom: 0; left: 7px; width: 2px; background-color: var(--accent-color); opacity: 0.3; }
 .history-item { position: relative; padding-left: 25px; margin-bottom: 15px; cursor: pointer; transition: opacity 0.2s; }
 .history-item::before { content: ''; position: absolute; left: 0; top: 6px; width: 16px; height: 16px; border-radius: 50%; background-color: var(--bg-color); border: 2px solid var(--accent-color); z-index: 1; }
-.history-item.decision::before { border-radius: 2px; border-width: 3px; background-color: var(--accent-color); } /* Marca de decisión sólida */
+.history-item.decision::before { border-radius: 2px; border-width: 3px; background-color: var(--accent-color); } 
 .history-title { font-weight: bold; display: block; font-size: 1.1rem; }
 .history-tag { font-size: 0.7rem; background: var(--accent-color); color: var(--bg-color); padding: 2px 6px; border-radius: 4px; margin-left: 5px; vertical-align: middle; }
 
@@ -211,14 +211,27 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
 @media (max-width: 600px) {
     #app-container { padding: 5px; }
     #book-container { margin-bottom: 10px; }
+    
     .content-centerer { 
-        padding: 1.5rem 1.5rem; /* Relleno equilibrado */
+        /* AJUSTE CRÍTICO: Padding igual a izquierda y derecha (24px = 1.5rem) */
+        padding: 1.5rem 1.5rem; 
         font-size: 1.1rem; 
         margin: 0; 
     }
+    
     .page-content p { 
-        text-indent: 1rem; /* CORRECCIÓN: Menor sangría en móvil para simetría */
+        /* AJUSTE CRÍTICO: Eliminamos la sangría para evitar el "hueco" a la izquierda */
+        text-indent: 0; 
     }
+    
+    /* AJUSTE IMÁGENES MÓVIL */
+    .page-content img {
+        margin: 1rem auto;
+        max-height: 45vh; /* Limita la altura a casi la mitad de la pantalla */
+        width: auto;
+        max-width: 100%;
+    }
+    
     #app-header { padding-bottom: 0.5rem; }
     #main-title { font-size: 1.4rem; }
 }
@@ -226,17 +239,19 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
 /* --- PANTALLA COMPLETA INMERSIVA (ANDROID) --- */
 :fullscreen #app-container {
     padding: 0; max-width: 100%; height: 100%;
-    /* El fondo se vuelve del color de la página para ocultar la mesa */
     background-color: var(--bg-color); 
 }
 :fullscreen body {
-    /* Asegura que todo el body tome el color */
     background-color: var(--bg-color);
 }
+::backdrop {
+    background-color: var(--bg-color);
+}
+
 :fullscreen #app-header, :fullscreen #app-footer { display: none; }
 :fullscreen #book-container { 
     max-width: 100%; margin: 0; height: 100%; 
-    margin-bottom: 0; /* Quitar margen inferior */
+    margin-bottom: 0; 
 }
 :fullscreen #page-wrapper { 
     border-radius: 0; border: none; box-shadow: none; 
