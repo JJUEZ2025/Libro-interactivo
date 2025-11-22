@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log("Iniciando Libro Interactivo - Versión Hitos e Imágenes");
+    console.log("Iniciando Libro Interactivo - Inmersión Total Android");
 
     // Elements
     const book = document.getElementById('book');
@@ -30,6 +30,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     let currentAudio = null;
     let isMuted = false;
     let totalPagesInStory = 0;
+
+    // Diccionario de colores para la barra de Android (Meta Theme Color)
+    const themeColors = {
+        'light': '#fdf6e3', // Color de la página, NO de la mesa
+        'sepia': '#f4ecd8',
+        'bone': '#f2f0e9',
+        'dark': '#1a1a1a'
+    };
 
     // --- Preferences ---
     function loadPreferences() {
@@ -62,9 +70,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         return savedHistory ? JSON.parse(savedHistory) : null;
     }
 
+    // --- Theme Logic (MEJORADA) ---
     function applyTheme(themeName) {
+        // 1. Cambiar clases CSS
         document.body.classList.remove('theme-light', 'theme-sepia', 'theme-bone', 'theme-dark');
         document.body.classList.add(`theme-${themeName}`);
+        
+        // 2. Actualizar Meta Theme Color (Para barra Android)
+        const metaThemeColor = document.querySelector("meta[name=theme-color]");
+        if (metaThemeColor && themeColors[themeName]) {
+            metaThemeColor.setAttribute("content", themeColors[themeName]);
+        }
     }
 
     function updateMuteIcon() {
@@ -77,59 +93,36 @@ document.addEventListener('DOMContentLoaded', async () => {
         muteBtn.setAttribute('aria-label', isMuted ? 'Activar Sonido' : 'Silenciar Audio');
     }
 
-    // --- NAVEGACIÓN FILTRADA (SOLO HITOS) ---
-    function openNav() {
-        updateNavigationList();
-        navModal.classList.add('active');
-    }
+    // --- NAVEGACIÓN FILTRADA (HITOS) ---
+    function openNav() { updateNavigationList(); navModal.classList.add('active'); }
     function closeNav() { navModal.classList.remove('active'); }
 
     function updateNavigationList() {
         historyList.innerHTML = '';
-        
-        // Filtramos el historial para mostrar SOLO:
-        // 1. El inicio (primera página)
-        // 2. Bifurcaciones (páginas con > 1 opción)
         const milestones = pageHistory.filter((pageId, index) => {
-            if (index === 0) return true; // Siempre mostrar inicio
+            if (index === 0) return true; 
             const pageData = story.find(p => p.id === pageId);
-            // Mostrar si tiene más de 1 opción (es una decisión)
             return pageData && pageData.choices && pageData.choices.length > 1;
         });
-
-        // Invertir para ver lo más reciente arriba
         const recentMilestones = milestones.reverse();
 
         recentMilestones.forEach((pageId) => {
             const pageData = story.find(p => p.id === pageId);
             if (!pageData) return;
-
             const li = document.createElement('li');
-            li.className = 'history-item decision'; // Estilo destacado siempre
-
+            li.className = 'history-item decision'; 
             let title = (pageHistory.indexOf(pageId) === 0) ? "Inicio" : "Punto de Decisión";
-            
-            // Preview del texto
             let preview = "";
             if (pageData.scenes && pageData.scenes.length > 0) {
                 const cleanText = pageData.scenes[0].replace(/<[^>]*>?/gm, '');
                 preview = cleanText.substring(0, 50) + "...";
             }
-
-            li.innerHTML = `
-                <span class="history-title">${title} <span class="history-tag">Volver aquí</span></span>
-                <span class="history-preview">${preview}</span>
-            `;
-
-            li.addEventListener('click', () => {
-                jumpToHistoryPoint(pageId);
-                closeNav();
-            });
+            li.innerHTML = `<span class="history-title">${title} <span class="history-tag">Volver aquí</span></span><span class="history-preview">${preview}</span>`;
+            li.addEventListener('click', () => { jumpToHistoryPoint(pageId); closeNav(); });
             historyList.appendChild(li);
         });
-        
         if(recentMilestones.length === 0) {
-            historyList.innerHTML = '<li class="history-item"><span class="history-preview">Avanza en la historia para ver puntos clave.</span></li>';
+            historyList.innerHTML = '<li class="history-item"><span class="history-preview">Avanza para ver decisiones.</span></li>';
         }
     }
 
@@ -151,20 +144,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // --- PRE-CARGA DE IMÁGENES (Solución carga lenta) ---
+    // --- PRE-CARGA ---
     function preloadNextImages(currentPageId) {
         const currentPage = story.find(p => p.id === currentPageId);
         if (!currentPage || !currentPage.choices) return;
-
-        // Buscamos todas las páginas a las que podemos ir desde aquí
         currentPage.choices.forEach(choice => {
             const nextPage = story.find(p => p.id === choice.page);
             if (nextPage && nextPage.images && nextPage.images.length > 0) {
-                // Pre-cargamos cada imagen
                 nextPage.images.forEach(imgUrl => {
                     const img = new Image();
                     img.src = imgUrl;
-                    // No necesitamos hacer nada con 'img', el navegador la cacheará
                 });
             }
         });
@@ -183,9 +172,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     
     function stopCurrentAudio() {
-        if (currentAudio) {
-            currentAudio.pause(); currentAudio.currentTime = 0; currentAudio = null;
-        }
+        if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; currentAudio = null; }
     }
 
     function playPageSound(pageId) {
@@ -214,7 +201,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         let contentHtml = '';
         if (pageData.images && pageData.images.length > 0) {
-            // Añadimos loading="eager" para la imagen actual
             contentHtml += `<div class="images-container">${pageData.images.map(url => `<img src="${url}" alt="Ilustración" loading="eager">`).join('')}</div>`;
         }
         if (pageData.scenes && pageData.scenes.length > 0) {
@@ -230,10 +216,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             pageData.choices.forEach(choice => {
                 const button = document.createElement('button');
                 button.textContent = choice.text;
-                button.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    goToPage(choice.page);
-                });
+                button.addEventListener('click', (e) => { e.stopPropagation(); goToPage(choice.page); });
                 choicesDiv.appendChild(button);
             });
             contentCenterer.appendChild(choicesDiv);
@@ -248,8 +231,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             pageNumberDiv.textContent = `Página ${pageData.page}`;
             pageContent.appendChild(pageNumberDiv);
         }
-
-        // ¡Lanzamos la precarga de las siguientes imágenes!
         preloadNextImages(pageId);
     }
 
@@ -287,29 +268,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     function goToPage(pageId, isGoingBack = false) {
         if (!story.some(p => p.id === pageId) || isTransitioning) return;
         isTransitioning = true;
-        pageWrapper.classList.remove('page-enter');
-        pageWrapper.classList.add('page-exit');
-
+        pageWrapper.classList.remove('page-enter'); pageWrapper.classList.add('page-exit');
         setTimeout(() => {
             renderPage(pageId);
             const contentDiv = pageWrapper.querySelector('.page-content');
             if (contentDiv) contentDiv.scrollTop = 0;
-            
             currentStoryId = pageId;
-            
-            if (!pageHistory.includes(pageId) && !isGoingBack) {
-                 pageHistory.push(pageId);
-            } else if (isGoingBack) {
-                 // Si estamos volviendo, no hacemos push, asumimos que el historial ya se ajustó
-            }
-            
-            savePageHistory();
-            playPageSound(pageId);
-
-            pageWrapper.classList.remove('page-exit');
-            void pageWrapper.offsetWidth; 
-            pageWrapper.classList.add('page-enter');
-
+            if (!pageHistory.includes(pageId) && !isGoingBack) { pageHistory.push(pageId); }
+            savePageHistory(); playPageSound(pageId);
+            pageWrapper.classList.remove('page-exit'); void pageWrapper.offsetWidth; pageWrapper.classList.add('page-enter');
             setTimeout(() => { isTransitioning = false; updateUI(); }, 500); 
         }, 400); 
     }
@@ -349,9 +316,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     muteBtn.addEventListener('click', toggleMute);
     book.addEventListener('click', handleBookClick);
 
-    document.addEventListener('fullscreenchange', () => {
-        setTimeout(() => window.scrollTo(0, 0), 50);
-    });
+    document.addEventListener('fullscreenchange', () => { setTimeout(() => window.scrollTo(0, 0), 50); });
 
     async function initializeApp() {
         loadPreferences();
