@@ -2,68 +2,44 @@
 
 :root {
     /* --- PALETAS DE COLORES --- */
-
-    /* TEMA CLARO (Original) */
-    --primary-color-light: #fdf6e3;
-    --secondary-color-light: #3a2e28;
-    --accent-color-light: #8b5e3c;
-    --main-bg-light: #e8e0d5;
-
-    /* TEMA SEPIA (Cálido) */
-    --primary-color-sepia: #f4ecd8;
-    --secondary-color-sepia: #5d4037;
-    --accent-color-sepia: #d84315;
-    --main-bg-sepia: #d7ccc8;
-
-    /* TEMA HUESO (Neutros Cálidos) */
-    --primary-color-bone: #f2f0e9;        /* Blanco Hueso / Marfil suave */
-    --secondary-color-bone: #4a453a;      /* Gris Pardo Oscuro (Elegante y legible) */
-    --accent-color-bone: #8c857b;         /* Taupe / Gris cálido para detalles */
-    --main-bg-bone: #dcdbd4;              /* Gris Piedra Cálido (Sin azul) */
-
-    /* TEMA OSCURO */
-    --primary-color-dark: #1e1e1e;
-    --secondary-color-dark: #e0e0e0;
-    --accent-color-dark: #ffab91;
-    --main-bg-dark: #121212;
+    /* CLARO */
+    --primary-color-light: #fdf6e3; --secondary-color-light: #3a2e28; --accent-color-light: #8b5e3c; --main-bg-light: #e8e0d5;
+    /* SEPIA */
+    --primary-color-sepia: #f4ecd8; --secondary-color-sepia: #5d4037; --accent-color-sepia: #d84315; --main-bg-sepia: #d7ccc8;
+    /* HUESO */
+    --primary-color-bone: #f2f0e9; --secondary-color-bone: #4a453a; --accent-color-bone: #8c857b; --main-bg-bone: #dcdbd4;
+    /* OSCURO */
+    --primary-color-dark: #1e1e1e; --secondary-color-dark: #e0e0e0; --accent-color-dark: #ffab91; --main-bg-dark: #121212;
 
     --font-body: 'Cormorant Garamond', serif;
     --font-title: 'IM Fell English', serif;
     
-    /* Valores dinámicos (se asignan abajo) */
     --bg-color: var(--primary-color-light);
     --text-color: var(--secondary-color-light);
     --accent-color: var(--accent-color-light);
     --main-bg: var(--main-bg-light);
 }
 
-/* Asignación de variables según la clase del body */
+/* Asignación */
 body.theme-light { --bg-color: var(--primary-color-light); --text-color: var(--secondary-color-light); --accent-color: var(--accent-color-light); --main-bg: var(--main-bg-light); }
 body.theme-sepia { --bg-color: var(--primary-color-sepia); --text-color: var(--secondary-color-sepia); --accent-color: var(--accent-color-sepia); --main-bg: var(--main-bg-sepia); }
 body.theme-bone { --bg-color: var(--primary-color-bone); --text-color: var(--secondary-color-bone); --accent-color: var(--accent-color-bone); --main-bg: var(--main-bg-bone); }
 body.theme-dark { --bg-color: var(--primary-color-dark); --text-color: var(--secondary-color-dark); --accent-color: var(--accent-color-dark); --main-bg: var(--main-bg-dark); }
 
-/* --- ESTILOS BASE --- */
+/* --- BASE --- */
 body, html {
-    margin: 0; padding: 0; width: 100%;
-    /* CORRECCIÓN CRÍTICA: Altura total para evitar cortes */
-    height: 100%; 
+    margin: 0; padding: 0; width: 100%; height: 100%;
     background-color: var(--main-bg);
-    font-family: var(--font-body);
-    color: var(--text-color);
+    font-family: var(--font-body); color: var(--text-color);
     transition: background-color 0.5s ease, color 0.5s ease;
     overflow-x: hidden; 
 }
 
 #app-container {
-    width: 100%; 
-    max-width: 1200px; 
-    margin: 0 auto;
+    width: 100%; max-width: 1200px; margin: 0 auto;
     display: flex; flex-direction: column;
     padding: 20px; box-sizing: border-box;
-    align-items: center; 
-    height: 100dvh; /* Altura dinámica */
-    min-height: 100%;
+    align-items: center; height: 100dvh; 
 }
 
 #app-header {
@@ -76,7 +52,6 @@ body, html {
     color: var(--accent-color); margin: 0; letter-spacing: 1px;
 }
 
-/* Botones y Menús */
 #settings-controls { display: flex; gap: 0.5rem; position: relative; }
 
 button {
@@ -97,7 +72,7 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
 #settings-menu.visible { display: flex; gap: 0.5rem; }
 #settings-menu button { width: 40px; height: 35px; }
 
-/* --- CONTENEDOR DEL LIBRO --- */
+/* --- LIBRO --- */
 #book-container {
     width: 100%; max-width: 900px; 
     flex-grow: 1; display: flex; flex-direction: column;
@@ -110,13 +85,9 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
     width: 100%; height: 100%;
     background-color: var(--bg-color);
     box-shadow: 0 10px 30px -5px rgba(0,0,0,0.2), 0 0 5px rgba(0,0,0,0.05);
-    border-radius: 6px;
-    border: 1px solid rgba(0,0,0,0.05);
-    overflow: hidden;
-    display: flex; flex-direction: column;
-    position: relative;
-    opacity: 1;
-    transform: translateX(0);
+    border-radius: 6px; border: 1px solid rgba(0,0,0,0.05);
+    overflow: hidden; display: flex; flex-direction: column;
+    position: relative; opacity: 1; transform: translateX(0);
     transition: border-radius 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -132,42 +103,46 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
     background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,0.05) 100%);
 }
 
-/* --- TRANSICIONES RÁPIDAS (SLIDE) --- */
+/* Transiciones */
 .page-exit { animation: slideOutLeft 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards; }
-@keyframes slideOutLeft {
-    0% { opacity: 1; transform: translateX(0) scale(1); }
-    100% { opacity: 0; transform: translateX(-30px) scale(0.95); }
-}
+@keyframes slideOutLeft { 0% { opacity: 1; transform: translateX(0) scale(1); } 100% { opacity: 0; transform: translateX(-30px) scale(0.95); } }
 .page-enter { animation: slideInRight 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
-@keyframes slideInRight {
-    0% { opacity: 0; transform: translateX(30px) scale(0.95); }
-    100% { opacity: 1; transform: translateX(0) scale(1); }
-}
+@keyframes slideInRight { 0% { opacity: 0; transform: translateX(30px) scale(0.95); } 100% { opacity: 1; transform: translateX(0) scale(1); } }
 
-/* --- CONTENIDO (CENTRADO Y SCROLL) --- */
+/* --- CONTENIDO --- */
 .page-content {
-    position: relative; z-index: 2;
-    padding: 0; /* Padding se maneja en el hijo */
-    color: var(--text-color);
-    overflow-y: auto; height: 100%;
+    position: relative; z-index: 2; padding: 0;
+    color: var(--text-color); overflow-y: auto; height: 100%;
     scrollbar-width: thin; scrollbar-color: var(--accent-color) transparent;
     display: flex; flex-direction: column;
 }
 
-/* Wrapper para centrar verticalmente */
 .content-centerer {
     padding: 3rem 4rem; 
     line-height: 1.8;
     font-size: clamp(1.15rem, var(--font-size-dynamic, 1.2rem), 1.65rem);
-    width: 100%; box-sizing: border-box;
-    margin: auto 0; /* Magia del centrado */
+    width: 100%; box-sizing: border-box; margin: auto 0; 
 }
 
-.page-content p { margin-bottom: 1.5rem; text-indent: 2rem; text-align: justify; }
+.page-content p { 
+    margin-bottom: 1.5rem; 
+    text-indent: 2rem; /* Sangría normal para PC */
+    text-align: justify; 
+}
+
+/* --- MEJORA DE IMÁGENES --- */
 .page-content img {
-    max-width: 100%; height: auto; border-radius: 2px;
-    margin: 2rem auto; display: block;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); filter: sepia(15%);
+    max-width: 100%; 
+    /* Limitamos la altura para que no ocupen toda la pantalla en móviles */
+    max-height: 60vh; 
+    width: auto; /* Mantiene proporción */
+    border-radius: 2px;
+    margin: 1.5rem auto; 
+    display: block; /* Centrado en bloque */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+    filter: sepia(15%);
+    /* Asegura que no se deforme */
+    object-fit: contain; 
 }
 
 .choices {
@@ -181,16 +156,12 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
     color: var(--accent-color); box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     transition: all 0.3s ease;
 }
-.choices button:hover { 
-    background-color: var(--accent-color); color: var(--bg-color);
-    transform: translateY(-2px); 
-}
+.choices button:hover { background-color: var(--accent-color); color: var(--bg-color); transform: translateY(-2px); }
 
 .page-number {
     position: relative; z-index: 2; text-align: center; padding: 1rem; 
     font-style: italic; font-size: 0.9rem; opacity: 0.6;
-    border-top: 1px solid rgba(0,0,0,0.05); 
-    margin-top: auto; flex-shrink: 0;
+    border-top: 1px solid rgba(0,0,0,0.05); margin-top: auto; flex-shrink: 0;
 }
 
 #app-footer { width: 100%; max-width: 900px; }
@@ -198,12 +169,9 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
     width: 100%; height: 4px; background-color: rgba(0, 0, 0, 0.1); 
     margin-top: 15px; border-radius: 2px;
 }
-#progress-bar {
-    height: 100%; width: 0%; background-color: var(--accent-color);
-    transition: width 0.5s ease; border-radius: 2px;
-}
+#progress-bar { height: 100%; width: 0%; background-color: var(--accent-color); transition: width 0.5s ease; border-radius: 2px; }
 
-/* --- ESTILOS DEL MODAL DE NAVEGACIÓN --- */
+/* --- MODAL --- */
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: rgba(0,0,0,0.5); backdrop-filter: blur(3px);
@@ -211,7 +179,6 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
     opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
 }
 .modal-overlay.active { opacity: 1; pointer-events: auto; }
-
 .modal-content {
     width: 90%; max-width: 500px; max-height: 80vh;
     background-color: var(--bg-color); color: var(--text-color);
@@ -221,75 +188,61 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
     border: 1px solid var(--accent-color);
 }
 .modal-overlay.active .modal-content { transform: translateY(0); }
-
-.modal-header {
-    padding: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.1);
-    display: flex; justify-content: space-between; align-items: center;
-}
+.modal-header { padding: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
 .modal-header h2 { margin: 0; font-family: var(--font-title); color: var(--accent-color); }
 #nav-close { font-size: 1.2rem; border: none; }
-
 .modal-body { padding: 1.5rem; overflow-y: auto; }
-
-.danger-btn {
-    width: 100%; padding: 12px;
-    background-color: rgba(200, 50, 50, 0.1); color: #c62828; border: 1px solid #c62828;
-    font-family: var(--font-body); font-weight: bold; margin-bottom: 1.5rem;
-}
-.danger-btn:hover { background-color: #c62828; color: white; }
-
-.history-list-container h3 {
-    margin-top: 0; font-size: 1rem; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px;
-}
+.danger-btn { width: 100%; padding: 12px; background-color: rgba(200, 50, 50, 0.1); color: #c62828; border: 1px solid #c62828; font-family: var(--font-body); font-weight: bold; margin-bottom: 1.5rem; }
+.history-list-container h3 { margin-top: 0; font-size: 1rem; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; }
 #history-list { list-style: none; padding: 0; margin: 0; position: relative; }
-#history-list::before {
-    content: ''; position: absolute; top: 0; bottom: 0; left: 7px;
-    width: 2px; background-color: var(--accent-color); opacity: 0.3;
-}
-.history-item {
-    position: relative; padding-left: 25px; margin-bottom: 15px;
-    cursor: pointer; transition: opacity 0.2s;
-}
-.history-item:hover { opacity: 0.7; }
-.history-item::before {
-    content: ''; position: absolute; left: 0; top: 6px;
-    width: 16px; height: 16px; border-radius: 50%;
-    background-color: var(--bg-color); border: 2px solid var(--accent-color); z-index: 1;
-}
-.history-item.active::before { background-color: var(--accent-color); }
-.history-item.decision::before { border-radius: 2px; border-width: 3px; }
-
+#history-list::before { content: ''; position: absolute; top: 0; bottom: 0; left: 7px; width: 2px; background-color: var(--accent-color); opacity: 0.3; }
+.history-item { position: relative; padding-left: 25px; margin-bottom: 15px; cursor: pointer; transition: opacity 0.2s; }
+.history-item::before { content: ''; position: absolute; left: 0; top: 6px; width: 16px; height: 16px; border-radius: 50%; background-color: var(--bg-color); border: 2px solid var(--accent-color); z-index: 1; }
+.history-item.decision::before { border-radius: 2px; border-width: 3px; background-color: var(--accent-color); } /* Marca de decisión sólida */
 .history-title { font-weight: bold; display: block; font-size: 1.1rem; }
-.history-preview {
-    font-size: 0.9rem; opacity: 0.8; white-space: nowrap; overflow: hidden; 
-    text-overflow: ellipsis; display: block; max-width: 100%;
-}
-.history-tag {
-    font-size: 0.7rem; background: var(--accent-color); color: var(--bg-color);
-    padding: 2px 6px; border-radius: 4px; margin-left: 5px; vertical-align: middle;
-}
+.history-tag { font-size: 0.7rem; background: var(--accent-color); color: var(--bg-color); padding: 2px 6px; border-radius: 4px; margin-left: 5px; vertical-align: middle; }
 
-/* --- MEDIA QUERIES --- */
+/* --- MEDIA QUERIES (MÓVIL) --- */
 @media (max-width: 900px) {
     #app-container { padding: 10px; }
     .content-centerer { padding: 2rem 2rem; }
 }
+
 @media (max-width: 600px) {
     #app-container { padding: 5px; }
     #book-container { margin-bottom: 10px; }
-    .content-centerer { padding: 1.5rem 1.5rem; font-size: 1.1rem; margin: 0; }
+    .content-centerer { 
+        padding: 1.5rem 1.5rem; /* Relleno equilibrado */
+        font-size: 1.1rem; 
+        margin: 0; 
+    }
+    .page-content p { 
+        text-indent: 1rem; /* CORRECCIÓN: Menor sangría en móvil para simetría */
+    }
     #app-header { padding-bottom: 0.5rem; }
     #main-title { font-size: 1.4rem; }
 }
 
-/* --- MODO INMERSIVO (PANTALLA COMPLETA) --- */
+/* --- PANTALLA COMPLETA INMERSIVA (ANDROID) --- */
 :fullscreen #app-container {
     padding: 0; max-width: 100%; height: 100%;
+    /* El fondo se vuelve del color de la página para ocultar la mesa */
+    background-color: var(--bg-color); 
+}
+:fullscreen body {
+    /* Asegura que todo el body tome el color */
     background-color: var(--bg-color);
 }
 :fullscreen #app-header, :fullscreen #app-footer { display: none; }
-:fullscreen #book-container { max-width: 100%; margin: 0; height: 100%; }
-:fullscreen #page-wrapper { border-radius: 0; border: none; box-shadow: none; }
-:fullscreen .content-centerer { padding: 3rem 2rem; max-width: 800px; align-self: center; }
+:fullscreen #book-container { 
+    max-width: 100%; margin: 0; height: 100%; 
+    margin-bottom: 0; /* Quitar margen inferior */
+}
+:fullscreen #page-wrapper { 
+    border-radius: 0; border: none; box-shadow: none; 
+}
+:fullscreen .content-centerer { 
+    padding: 3rem 2rem; max-width: 800px; align-self: center; 
+}
 
 svg { fill: currentColor; width: 20px; height: 20px; }
