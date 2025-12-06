@@ -11,4 +11,3 @@ Plantilla básica en HTML, CSS y JS para historias interactivas.
 
 Estos pasos te permiten validar rápidamente que las modificaciones realizadas se guardaron y se ven como esperas.
 
-> Tip: En la cabecera de la página verás un subtítulo de prueba (“Subtítulo de prueba para verificar la conexión activa”); si lo visualizas en el navegador, sabrás que la conexión y el despliegue de cambios están funcionando.
