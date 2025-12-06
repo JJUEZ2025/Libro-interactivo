@@ -10,3 +10,4 @@ Plantilla básica en HTML, CSS y JS para historias interactivas.
 5. Cuando estés conforme, ejecuta `git add .` y `git commit -m "mensaje"` para registrar tus cambios.
 
 Estos pasos te permiten validar rápidamente que las modificaciones realizadas se guardaron y se ven como esperas.
+
