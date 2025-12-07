@@ -1,0 +1,10 @@
+[
+  {
+    "id": "frankenstein",
+    "title": "Frankenstein",
+    "author": "Mary Shelley (adaptación)",
+    "description": "Una adaptación interactiva del clásico con decisiones y finales alternativos.",
+    "cover": "covers/frankenstein.jpg",
+    "storyFile": "stories/frankenstein.json"
+  }
+]
