@@ -1,1 +1,313 @@
+[
+  {
+    "id": -1,
+    "scenes": [
+      "Te doy la bienvenida a una experiencia de lectura interactiva. Esta obra, inspirada en la novela original de Mary Shelley, es una adaptación fiel en su esencia y acontecimientos principales, reinterpretada por mí para el formato digital. Aquí no solo leerás: ELEGIRÁS.",
+      "En momentos clave podrás tomar decisiones que abrirán bifurcaciones y caminos alternativos al relato original, revelando matices y desenlaces posibles. Acompañan la historia ilustraciones originales y paisajes sonoros puntuales que intensifican la atmósfera (se recomienda usar audífonos y mantener el volumen moderado).",
+      "Si deseas permanecer cerca del espíritu clásico, podrás seguir el cauce que conoces; si prefieres explorar lo incierto, tendrás la libertad de desviarte y descubrir nuevos caminos."
+    ],
+    "choices": [
+      { "text": "Iniciar Aventura", "page": 999 }
+    ]
+  },
+  {
+    "id": 999,
+    "images": ["images/monstruo_rostro.jpg"],
+    "sound": "monstruoinicio.mp3",
+    "choices": [
+    { "text": "Continuar", "page": 0}
+  ]
+  },
+  {
+    "id": 0,
+    "scenes": [
+      "A quien se atreva, bienvenido a esta historia sombría.",
+      "Te aguarda un relato de ambición desmedida, de creación y abandono, de amor y de venganza.",
+      "Pero no serás un mero espectador.",
+      "En tus manos no hay solo páginas, sino elecciones.",
+      "Las decisiones que tomes alterarán el curso de una vida, y quizás, el de muchas.",
+      "Lee con atención la historia de un hombre que se atrevió a jugar a ser Dios, y prepárate, pues pronto su dilema también será el tuyo."
+    ],
+    "choices": [
+      { "text": "Estoy listo para continuar.", "page": 1 }
+    ]
+  },
+  {
+    "id": 1,
+    "scenes": [
+      "Nuestra historia comienza con Víctor Frankenstein, un joven nacido en el ceno de una Familia llena de opulencia y afecto en Ginebra, en el año 17…. Su infancia fue un paraíso, arropado por un padre benévolo y de moral firme, y una madre que lo adoraba. Su infancia se desarrolló entre estudios personalizados y escapes cotidianos para pasar las tardes con su prima y alma gemela, la dulce Elizabeth Lavenza.",
+      "Desde niño, Victor no se conformaba con el mundo tal y como era. Ansiaba desentrañar sus secretos más profundos. Mientras otros jugaban, él devoraba los textos polvorientos de alquimistas arcanos como Cornelio Agripa y Paracelso, soñando con el poder de doblegar la vida y la muerte. Sueño alimentado por su sed de conocimiento o quizá por ese intrínseco miedo a la muerte que todos en algún momento llegamos a sentir.",
+      "Esta sed insaciable de conocimiento lo llevó a la prestigiosa Universidad de Ingolstadt. Allí, su mente brillante se empapó de la ciencia moderna, de la química y la anatomía. Descubrió el galvanismo y el poder latente en la electricidad, y en su cabeza, las viejas fantasías de la alquimia y las nuevas verdades de la ciencia comenzaron a fusionarse en un único y terrible propósito: Vencer a la muerte. Convertirse en un benefactor para toda la humanidad. Genuina era su intención, aunque su motivación naciera del miedo y de satisfacer su ego, su fin respondía a un propósito que el consideraba altruista."
+    ],
+    "choices": [
+      { "text": "Continuar", "page": 2 }
+    ]
+  },
+  {
+    "id": 2,
+    "scenes": [
+      "Los años en la universidad se consumieron con una velocidad febril. Para su familia, sin embargo, el tiempo se medía en el pesado silencio que dejaban sus cartas sin respuesta. Elizabeth y su mejor amigo Henry le enviaban cada tanto, cartas que terminaban acumulabas en algún rincón del laboratorio. Víctor se había amurallado en su mundo, y en los últimos meses, su laboratorio se convirtió en su única morada. Pasaban las horas y los días sin que nadie viera su rostro.",
+      "Sus únicas salidas eran breves excursiones nocturnas. Se lo podía observar como una sombra apresurada, siempre con la cabeza gacha mirando al suelo, ensimismado y con una pala en la mano. Se movía con la urgencia de quien ha olvidado algo vital y teme no poder recuperarlo. Quienes lo veían pasar no podían evitar cuestionarse si la cordura aún habitaba en aquel joven de aspecto demacrado."
+    ],
+    "choices": [
+      { "text": "Continuar", "page": 3 }
+    ]
+  },
+  {
+    "id": 3,
+    "images": ["images/victor_conpala.png"],
+    "scenes": [],
+    "choices": [
+      { "text": "Continuar", "page": 4 }
+    ]
+  },
+  {
+    "id": 4,
+    "scenes": [
+      "Era una noche de noviembre, nueve meses habían pasado desde que Víctor Frankenstein iniciara aquella agotadora tarea. Estaba solo en su laboratorio, con un profundo silencio que cada tanto era abruptamente interrumpido por los relámpagos que afuera azotaban los tejados de Ingolstadt. Dentro, sobre una mesa apenas iluminada por la luz amarillenta de las lámparas, yacía inerte el resultado de nueve meses de un macabro trabajo. Era un cuerpo grande, armado con huesos extraídos de cementerios y ligamentos de res atados a fragmentos humanos; las uniones, tensadas con hilo de cáñamo y alambre fino, marcaban líneas crudas a lo largo de los brazos y el pecho. La piel, tomada de distintos cadáveres, no coincidía en tono ni textura, se alternaban zonas blanquecinas con otras ásperas de color putrefacto, y en varios puntos la costura se entreveía cúmulos de grasa coagulada y carne morada. Las manos, desproporcionadas, mostraban uñas amarillentas que simulan más ser garras debido a su grosor y extensión, en los codos y las rodillas la piel sobraba y formaba pliegues rígidos. Un mechón oscuro había sido injertado en un cuero cabelludo pálido y mal tensado. Sin embargo, lo que más atraía la mirada era su rostro: surcado de cicatrices y teñido por un tono verdoso que recordaba la carne en descomposición. Los párpados cerrados hundían los ojos en cuencas desiguales, como si nunca hubieran pertenecido a un ser vivo. Del cuerpo emanaba un hedor denso, mezcla de conservantes, sangre seca y humedad añeja. Permanecía inmóvil, aunque su sola presencia parecía pesar en el aire."
+    ],
+    "choices": [
+      { "text": "Continuar", "page": 5 }
+    ]
+  },
+  {
+    "id": 5,
+    "scenes": [
+      "La maquinaria retumbaba con un zumbido extraño, como si respirara por sí misma. Los frascos de vidrio hervían en burbujas intermitentes, y un relámpago atravesó la estancia, revelando por un instante la piel amarillenta y casi traslúcida del cuerpo tendido. Frente a aquella figura, Víctor Frankenstein, demacrado por noches interminables, alzó la mano sobre la palanca que lo uniría al rayo. El gesto tembloroso contenía tanto miedo como ansia: en un instante, la frontera entre lo muerto y lo vivo quedaría a merced de su decisión. Todo su ser anhela este momento, el triunfo definitivo. Pero en el último segundo, una duda helada recorre su espina dorsal. ¿Está a punto de convertirse en un dios... o en un demonio? La línea entre la genialidad y la blasfemia nunca le ha parecido tan delgada.",
+      "Su mano se cierne sobre la palanca. Y ahora, lector, esa mano es la tuya."
+    ],
+    "sound": "tensionpalanca.mp3",
+    "choices": [
+      { "text": "OTORGAR LA VIDA. Bajas la palanca. El sueño de Victor debe ser completado sin importar el coste.", "page": 6 },
+      { "text": "RECHAZAR LA CREACIÓN. Apartas la mano. Es un acto blasfemo, no se puede jugar a ser Dios. Debes detenerte ahora que puedes.", "page": 13 }
+    ]
+  },
+  {
+    "id": 6,
+    "scenes": [
+      "Confesiones en el Hielo",
+      "El crujido del hielo era el único sonido que rompía el silencio sepulchral del Ártico. A bordo del Vagabundo, un navío ahora prisionero en un mar helado, Elian Dubois escuchaba la historia más extraña y terrible que jamás hubiera imaginado. Llevaba meses persiguiendo el norte, arrastrando a su tripulación hacia un punto en el mapa jamás alcanzado antes por el hombre. Anhelaba respuestas que la ciencia aún no tenía, quería descubrir, entender, pero en el fondo, lo que realmente buscaba era el prestigio eterno de aquellos que son pioneros. Sin embargo, el viaje había sido tan arduo como se temía. Ahora, al ver los rostros cansados de sus hombres, Elian recordaba las despedidas en el puerto: esas sonrisas fingidas para las esposas y los abrazos sentimentales que se aferraban a una promesa de retorno. Una promesa que, en el fondo de sus corazones, sabían que probablemente no podrían cumplir.",
+      "El Vagabundo y su tripulación llevaban más de veinticuatro horas varados en la inmensidad de un océano congelado. El navío se encontraba completamente rodeado por una planicie de hielo. Una espesa neblina helada recorría el horizonte, un velo que hacía imposible que pudieran distinguir qué tan lejos se extendía esta prisión de hielo. Con cada minuto que transcurría, una creciente incertidumbre se apoderaba de todos, una ansiedad que se contagiaba en el aire y que, en la imaginación de los marineros, hacía que la propia neblina pareciera aún más espesa. La única esperanza era que el hielo que los mantenía presos volviera a su estado primigenio y así pudieran retomar su tortuoso camino."
+    ],
+    "choices": [
+      { "text": "Continuar", "page": 7 }
+    ]
+  },
+  {
+    "id": 7,
+    "scenes": [
+      "En esas reflexiones se encontraban, cuando de repente, y bajo el asombro general, uno de los tripulantes se precipitó, ansioso, sobre la proa. Se aferró a la borda con ahínco, entornando los ojos como quien intenta vislumbrar una imagen tenue en la lejanía. Un murmullo de expectación recorrió la cubierta. \"¿Quizás es tierra?\", pensaron algunos, aunque la lógica y sus mapas les gritaban que no tenía sentido. \"¿Será otro navío que se encuentre atrapado como nosotros?\". Era poco probable aquello. Pero entonces, ¿qué era?.",
+      "Con el paso de los segundos, aquel pequeño punto, casi indivisible por la espesura de la neblina, se fue acercando cada vez más y más. Sin embargo, y contrario a lo que se esperaba, la cercanía no le otorgaba una forma definida; el punto informe, a pesar de acortar la distancia, permanecía sin una silueta reconocible y carecía de proporciones normales. Aparentaba ser una forma erguida sobre un objeto jalado por unos perros, sí, pero la masa que gobernaba el trineo desconcertó a todos profundamente. Nadie en la cubierta respiraba; todos mantenían su mirada fija, perpleja.",
+      "El trineo pasó a pocos metros del Vagabundo. Fue entonces cuando pudieron observar con pavorosa claridad cómo una figura con proporciones que no parecían humanas iba encima del vehículo, tirado por cuatro perros que corrían a una velocidad endiablada. \"¿es una persona?\", pregunto una voz temblorosa. No, no podía serlo, la figura era demasiado grande, demasiado alta para serlo. Sin embargo, iba vestida; una especie de manto oscuro le cubría el cuerpo, pero dejaba al descubierto unos brazos largos y nervudos, con unas escalofriantes manos que agarraban las cuerdas del trineo con una tensión palpable. Y entonces, ocurrió lo impensable: más de un hombre pudo jurar que la criatura, como si sintiera sus miradas, giró levemente el cuello y que unos vacuos y escalofriantes ojos miraron hacia el navío. Todo esto pasó en segundos, causando un asombro y un desconcierto tan profundos que el frío del ambiente pareció, por un instante, penetrarles hasta los huesos."
+    ],
+    "choices": [
+      { "text": "Continuar", "page": 8 }
+    ]
+  },
+  {
+    "id": 8,
+    "scenes": [
+      "Veinticuatro horas más transcurrieron. El escenario era el mismo; la neblina parecía disiparse, pero el hielo bajo ellos no daba señales de ceder. La tensión en el Vagabundo había menguado, en gran medida debido al coñac y al juego de cartas con el que la tripulación intentaba matar el tiempo y silenciar la mente. «¡Es el norte!», se decían. «Seguramente hay criaturas aquí que el hombre común nunca ha visto». «Pero qué horrible criatura, y más horrible el hecho de que sea tan parecida a los humanos», pensaban.",
+      "Elian, como de costumbre, se encontraba en su camarote sumido en sus reflexiones, aferrado a su propósito, mientras uno de los tripulantes seguía añadiendo cada vez más detalles a lo observado por todos muchas horas atrás. Cada vez que hablaba parecía agregarle más características al ser del trineo, detalles que hacían dudar al capitán. ¿Habrá sido una sugestión colectiva?, se cuestionaba Elian, cuando unos gritos que venían de la cubierta irrumpieron en sus pensamientos. Un escalofrío recorrió tanto el cuerpo del capitán como el del acompañante parlanchín. Desde afuera se oyó un clamor: —¡Es el monstruo!",
+      "—Ya lo veremos —dijo el capitán Dubois, y ambos subieron a toda prisa.\nEn cubierta, varios marineros inclinados sobre la proa llamaban a gritos a un hombre que se encontraba en un trineo parecido al visto el día anterior. Sin embargo, este solo tenía un perro moribundo que no parecía estar más próximo a la muerte que el individuo que halaba las cuerdas. El desconocido, a pesar de su estado, se encontraba realizando preguntas acerca del destino y la motivación del navío; cosa rara para alguien que se encuentra al borde de la muerte, pensaban todos los marineros, desconcertados. Elian se acercó a la proa, miró al desconocido y le gritó:\n—Nos dirigimos al norte, nuestro fin es el conocimiento y la investigación. Somos representantes de la corona inglesa. ¡Suba, por favor, tenemos comida y bebidas!\n—¿Puede mi perro acompañarnos?\n—Por supuesto —dijo el capitán. Aunque no creo que sobreviva, pensó."
+    ],
+    "choices": [
+  { "text": "Continuar", "page": 20 }
+]
+
+  },
+  {
+    "id": 13,
+    "scenes": [
+      "                    Una vida de ecos y sombras"
+    ],
+    "images": ["images/vidadeecos.png"],
+    "choices": [
+      { "text": "Continuar", "page": 15 }
+    ]
+  },
+  {
+    "id": 15,
+    "scenes": [
+      "Con un jadeo ahogado, Víctor apartó la mano de la palanca como si el metal le quemara la piel. El zumbido de la maquinaria, que antes era una promesa de gloria, le pareció de pronto un lamento espeluznante que llenaba el ático. El olor a ozono y a carne muerta le revolvió el estómago. -No. No puedo hacerlo — Grito, con la voz rota por un pánico recién descubierto.",
+      "En un arrebato de lucidez, o quizás de cobardía, Víctor comenzó a desmontar su creación. Durante días y noches, trabajó con la furia de un pecador que intenta borrar su herejía, desmembrando la abominación pieza por pieza, devolviendo cada fragmento a la tierra y a la noche de la que provino. Enterró los instrumentos, quemó sus anotaciones y, con cada palada de tierra, sintió un inmenso y vacío alivio; el alivio de un hombre que ha mirado al abismo y ha decidido dar un paso atrás.",
+      "Los años pasaron. Víctor abandonó sus estudios y regresó a Ginebra, buscando refugio en la calidez de su hogar y en la normalidad que había despreciado. A pesar de la insistencia de su familia, nadie logró sacarle información acerca de sus aislados años en Ingolstadt. Aunque se envolvía entre abrazos, afecto y compañía, la mirada de Víctor había perdido el encanto y la inocencia de su juventud. En las conversaciones cotidianas y en sus paseos con Henry, parecía que Víctor siempre miraba hacia atrás, como quien huye de un pasado que no termina de olvidarse y que, quizás, nunca lo lograría."
+    ],
+    "choices": [
+      { "text": "Continuar", "page": 16 }
+    ]
+  },
+  {
+    "id": 16,
+    "scenes": [
+      "La vida de Víctor se vio sumida en la normalidad y placidez de una vida corriente. A pesar del peso de los recuerdos, atrás quedaron esos años en donde la ambición desmedida casi lo llevaron a un camino sin retorno. La historia de amor de su infancia se materializó en su mediana edad, cuando se casó con su amada Elizabeth, en cuyo amor se refugió siempre como un bálsamo para una herida que nadie más podía ver. Decidió seguir modestamente los pasos de su padre (cosa impensable en su juventud) y, con el tiempo, se terminó convirtiendo en un respetado magistrado. Tuvo hijos, hubo risas, tranquilidad, familia… A ojos de todos, un hombre completo y feliz.",
+      "Pero la procesión va por dentro. La pregunta de «qué habría pasado si...» se convierte en una sombra perpetua, una compañera silenciosa que se sienta a su lado en su vida honorable. Lo asalta en los momentos más inoportunos: en medio de una cena familiar, al escuchar la risa despreocupada de sus hijos, se pregunta en silencio qué clase de vida habría tenido si el miedo no lo hubiese congelado. Aunque amor que lo rodea es real y lo atesora, a veces lo siente como un ancla que lo mantiene en una orilla segura, lejos del océano tempestuoso donde reside la verdadera grandeza. Ningún marinero se hace experto en aguas tranquilas, se repetía.",
+      "En las noches de tormenta, se despertaba sudando frío, convencido de haber oído el eco de aquella maquinaria impía, el zumbido de una promesa incumplida. A veces, mientras escribía sentencias de ley y orden en su despacho, su pluma se detenía y, sin querer, trazaba diagramas anatómicos en los márgenes de los documentos legales: la curvatura perfecta de una falange, la compleja red de un sistema nervioso. Veía la belleza de la anatomía en todas partes: en los tendones de un caballo que tira de un carruaje, en la estructura de un árbol desnudo contra el cielo invernal. El mundo entero es un constante recordatorio de la obra que abandonó."
+    ],
+    "choices": [
+      { "text": "Continuar", "page": 17 }
+    ]
+  },
+  {
+    "id": 17,
+    "scenes": [
+      "No es miedo lo que sentía, sino una melancolía infinita, la nostalgia corrosiva por una grandeza prohibida que tuvo al alcance de la mano y abandonó en el último instante. Abrazaba a Elizabeth, sintiendo el calor genuino de su amor, pero una parte de su mente estaba ausente, perdida en los pasillos fríos de su laboratorio de Ingolstadt. Sin duda se había convertido en un hombre honorable y justo, pero sabía, en el fondo de su ser, que había cambiado la posibilidad de ser un dios por la comodidad de ser un buen hombre. Vivió una vida que cualquiera calificaría de plena, pero el no. Cada noche, en sueños, regresaba a la única cosa que le habría hecho inmortal.",
+      "...",
+      "Y aquí, lector, termina esta bifurcación."
+    ],
+    "choices": [
+      { "text": "Continuar", "page": 18 }
+    ]
+  },
+  {
+    "id": 18,
+    "scenes": [
+      "Has elegido el sendero de la prudencia. Has salvado a Víctor de sí mismo y le has concedido una existencia que muchos llamarían plena. Una elección noble, sin duda. Sensata.",
+      "Pero seamos honestos: lo que has elegido es una vida callada, sin sobresaltos, sin desbordes. Una vida que se desliza como un río manso, sin dejar huella en la roca.",
+      "¿Está mal? En absoluto. Es una vida segura, tranquila, incluso feliz. Pero dime, ¿es esa la vida que viniste a buscar aquí?.",
+      "La historia que quema, la que estremece, no se cuenta en los rincones cálidos de un hogar. Nace en la tormenta, en la chispa que atraviesa la oscuridad. La verdadera pregunta no es si puedes vivir en paz… sino si te atreves a mirar de frente al rayo y bajar la palanca. El abismo te observa de vuelta. Te llama a retroceder, a regresar a aquella noche de tormenta… y a elegir de nuevo."
+    ],
+    "choices": [
+      { "text": "Me quedo con esta vida de paz.", "page": 19 },
+      { "text": "Volver atrás. Miremos el abismo de frente.", "page": 5 }
+    ]
+  },
+  {
+    "id": 19,
+    "scenes": [
+      "Has elegido un camino de paz. La historia de Víctor Frankenstein se disuelve aquí, como nieve sobre el mar en calma. FIN."
+    ],
+    "choices": []
+  },
+{
+  "id": 20,
+  "images": [],
+  "scenes": [
+    "Movidos por una mezcla de piedad y curiosidad, la tripulación se arremolinó en la borda, arrojando cuerdas con una urgencia que rompió la monotonía de las últimas horas. El desconocido, desde el hielo, hizo un gesto débil, no hacia sí mismo, sino hacia el bulto de pelo que yacía a sus pies. El capitán Dubois comprendió al instante. Con unas órdenes rápidas, los marineros improvisaron una hamaca con una red de carga, bajándola con cuidado. Con un esfuerzo que pareció costarle la vida, el hombre logró empujar a su perro semiinconsciente sobre la red.",
+    "El animal, un bulto de huesos y pelaje enmarañado, ascendió lentamente, balanceándose con el viento. Una vez el perro yacía a salvo en cubierta los marineros volvieron a lanzar las cuerdas para el hombre. El ascenso fue una tarea ardua y penosa. Dos de los marineros más fuertes tuvieron que asegurar un lazo alrededor de su pecho, ya que el hombre carecía de las fuerzas suficientes para sujetarse por sí mismo.",
+    "Mientras lo izaban, su cuerpo pendía como un peso muerto, pero su cabeza permanecía erguida. No miraba hacia arriba, a sus salvadores, sino hacia el horizonte norte, como si temiera perder de vista algo en la lejanía. Había una voluntad de hierro en esa postura, una tensión que desmentía su fragilidad. Su cuerpo figuraba rendido, pero parecía habitado por un alma que se negaba a partir hasta no haber saldado sus deudas con el mundo."
+  ],
+  "choices": [
+    { "text": "Continuar", "page": 21 }
+  ]
+},
+{
+  "id": 21,
+  "images": [],
+  "scenes": [
+    "Toda la tripulación permanecía inmóvil alrededor del extraño. Este se encontraba sentado en la cubierta, con su perro acostado sobre las piernas, ambos visiblemente extenuados.",
+    "Elian se arrodilló a su lado, apartando a los curiosos con un gesto. —Mi nombre es Elian Dubois, capitán de este navío. Está a salvo.",
+    "El hombre tosió, un sonido seco y doloroso. Fijó su mirada en Elian; no respondió enseguida, parecía evaluar el alma del capitán.",
+    "Con una voz áspera como la lija, respondió: —Le agradezco... Soy Víctor Frankenstein."
+  ],
+  "choices": [
+    { "text": "Continuar", "page": 24 }
+  ]
+},
+{
+  "id": 24,
+  "images": [],
+  "scenes": [
+    "Los días transcurrieron. Frankenstein permanecía en un letargo que solo interrumpía para comer o beber; a veces preguntaba por su perro y enseguida volvía a hundirse en un sueño profundo. Elian mismo se encargaba de su cuidado, cautivado por la inteligencia y la profunda melancolía que habitaba en la mirada de su huésped. Víctor comía poco y hablaba menos, pero en sus breves instantes de lucidez dejaba entrever una mente brillante y un espíritu atormentado.",
+    "Una noche, mientras el viento del Ártico aullaba contra los cristales del camarote y el barco crujía, aún prisionero del hielo que poco a poco cedía, Elian observaba a su paciente, que al fin parecía más estable.",
+    "—Usted me preguntó por el propósito de mi viaje —comenzó Elian con voz sosegada.—Mi propósito, señor Frankenstein, es sencillo: arrancar a la naturaleza los secretos que custodia en este confín del mundo. Busco explorar lo inexplorado. Los riesgos son altos, pero es el precio que se paga por la gloria.—"
+  ],
+  "choices": [
+    { "text": "Continuar", "page": 25 }
+  ]
+},
+{
+  "id": 25,
+  "images": [],
+  "scenes": [
+    "Víctor guardó silencio por un largo momento, una triste sonrisa se dibujó en sus labios rotos.",
+    "—Usted habla de ambición y de gloria... —dijo, su voz más firme que nunca antes.—Yo también hablé ese idioma una vez. Fui más allá de lo que ningún hombre se atrevió, y por ello he sido condenado a esta persecución infernal.",
+    "Se incorporó levemente, sus ojos turbados clavados en los de Elian.—Usted busca conocimiento. Yo le daré una lección que no encontrará en ningún mapa. Escuche mi historia, capitán. Escúchela con atención, y que le sirva como advertencia. Quizás así, mi desdichada existencia tenga al menos un propósito...—"
+  ],
+  "choices": [
+    { "text": "Continuar", "page": 27 }
+  ]
+},
+{
+  "id": 27,
+  "images": [],
+  "scenes": [
+    "Un denso silencio se apoderó del camarote, roto solo por el gemido del viento y el crujido de la madera del barco. Elian asintió lentamente, su rostro serio a la luz parpadeante de la lámpara, preparado para escuchar el testamento de aquel hombre. Víctor cerró los ojos por un instante, como si reuniera las fuerzas no solo para recordar, sino para revivir todo lo que había perdido.",
+    "Las horas pasaron, devoradas por el relato que fluía de los labios de Víctor Frankenstein. Su voz desdichada encontraba en Elian Dubois un oído atento, fue como romper un dique de soledad que lo había ahogado durante mucho tiempo; un desahogo inquieto y entusiasta. Para Elian, la fascinación crecía a cada instante. Veía en aquel hombre roto los vestigios de una alma pionera, la admiración por alguien que había vivido intensamente y cuyo conocimiento, incluso velado por el dolor, era inmenso. Se notaba en su forma de hablar, en la autoridad con que, a pesar de todo, evocaba sus ideas.",
+    "Con una calidez nostálgica, Víctor le habló sobre su niñez en Ginebra, sobre sus hermanos y la devoción de sus padres. Un brillo casi inocente volvía a los ojos al pronunciar el nombre de Elizabeth. Le contó a Elian cómo ella, un regalo del destino, llegó a su familia para convertirse en el centro de su universo, un faro de bondad y belleza. Le habló de Henry Clerval, y una sonrisa genuina, la primera que Elian le veía, asomó en su rostro al recordar sus anécdotas compartidas, las travesuras de la infancia y las nobles aspiraciones de su mejor amigo. Habló mucho sobre esa juventud dorada, sobre un profesor cuyas enseñanzas encendieron su curiosidad y cuyas frases aún resonaban en su memoria."
+  ],
+  "choices": [
+    { "text": "Continuar", "page": 28 }
+  ]
+},
+{
+  "id": 28,
+  "images": [],
+  "scenes": [
+    "Pero entonces, su voz se enturbió al mencionar la palabra «Ingolstadt». El calor abandonó el relato. El tono de la conversación y su propia voz tomaron un matiz oscuro, casi escalofriante. Le habló a Elian sobre la alquimia, la anatomía y la química, pero lo hizo muy por encima, con la calculada vaguedad de quien cuenta una historia incompleta, ocultando los detalles cruciales para evitar a toda costa que su impío conocimiento pudiera llegar a replicarse. Omitió las crudas imágenes que ahora le avergonzaban, los detalles sórdidos de sus profanaciones.",
+    "Y cuando ya no pudo huir más, cuando las palabras se le agotaron y no quedaba otro resquicio donde ocultarse, Víctor Frankenstein, con un suspiro que arrastraba todo el peso de su alma, habló sobre aquella lúgubre noche de noviembre.",
+    "—Pude haberlo evitado —dijo Víctor, con un triste susurro—."
+  ],
+  "choices": [
+    { "text": "Continuar", "page": 30 }
+  ]
+},
+{
+  "id": 30,
+  "images": [],
+  "scenes": [
+    "Pude, y debí, haber tomado otra decisión. Justo en el instante decisivo, tuve un breve y terrible destello de razón. Por primera vez en meses, mis ojos se abrieron y no vieron el pináculo de la ciencia, sino un profano ensamblaje de restos que yacía sobre la mesa. Un cuestionamiento, agudo y helado, me sacudió por completo: «¿Es esto correcto?». Pero aquella duda, capitán, fue fugaz e inútil. Sentí que ya era demasiado tarde, que había una obligación terrible en terminar lo que había comenzado. Tuve la aterradora certeza de que mi historia ya estaba tejida. ¿Conoce las leyendas de las hermanas Moiras, aquellas que hilan el destino? Sentí mi propia mano moverse con una voluntad que no era la mía, como si las propias diosas tiraran de ella a su voluntad. No pude evitarlo, no pude evitarlo…",
+    "—Jalé la palanca. Lo hice, señor Dubois...",
+    "Al pronunciar esas últimas palabras, el rostro de Víctor palideció hasta volverse del color de la cera. Un torrente de lágrimas silenciosas comenzó a brotar de sus ojos cerrados, un llanto de hombre roto que desconcertó por completo al capitán. Dubois sintió el miedo de Víctor como si fuera propio. Había empatizado con aquel extraño de una forma que no comprendía; sentía una extraña y dolorosa admiración por él."
+  ],
+  "choices": [
+    { "text": "Continuar", "page": 31 }
+  ]
+},
+{
+  "id": 31,
+  "images": [],
+  "scenes": [
+    "La curiosidad, voraz, luchaba en su interior contra un respeto recién nacido. Ardía en deseos de extraer de él toda la historia en ese mismo momento, de saber qué ocurrió después, qué ojos se abrieron en la oscuridad. Pero la compasión se impuso. Conteniendo su impaciencia, le acercó un vaso con agua al extenuado relator.",
+    "—Beba, Frankenstein. Descanse. Cuando usted lo desee, y tenga las fuerzas, continuaremos con la historia.",
+    "Un \"no\" casi inaudible, pero rotundo, salió de los labios de Víctor. Bebió el agua que le ofrecía el capitán, y el simple acto pareció devolverle un ápice de compostura. Dejó el vaso a un lado y continuó, su voz retomaba la firmeza."
+  ],
+  "choices": [
+    { "text": "Continuar", "page": 32 }
+  ]
+},
+{
+  "id": 32,
+  "images": [],
+  "scenes": [
+    "—Su gesto es amable, capitán, y se lo agradezco. Pero no puedo detenerme. No después de haber reabierto esta herida. Durante demasiado tiempo he sido el único guardián de esta verdad. Necesito que usted... que alguien... la conozca por completo. Mi angustia solo tendrá sentido si llego hasta el final. Debo continuar.",
+    "—Momentos después de jalar la palanca, un relámpago desgarró la noche, iluminando el laboratorio con un fulgor espectral. Con ese destello, un espasmo violento sacudió el cuerpo inerte sobre la mesa. Su asquerosa piel amarillenta se tensó, y cada músculo pareció retorcerse y explotar en una agonía silenciosa, violentos espasmos sacudían cada músculo de aquella masa, aquel cuerpo... Y entonces, emitió un sonido. Un gemido gutural, sepulcral, un grito que desde esa noche he vuelto a escuchar en un número interminable de pesadillas.",
+    "Estaba ciego por mis ansias de poder, capitán, y el velo que cubría mis ojos solo pudo descorrerse cuando aquel rayo dio vida a la bestia que yo había creado. El ser seguía convulsionando, gimiendo, hasta que, con una lentitud tortuosa, sus ojos acuosos se abrieron. Y su mirada me alcanzó."
+  ],
+  "choices": [
+    { "text": "Continuar", "page": 29 }
+  ]
+},
+{
+  "id": 29,
+  "images": ["images/victorduda.png"],
+  "scenes": [],
+  "sound": "monstruoinicio.mp3",
+  "choices": [
+    { "text": "Continuar", "page": 33 }
+  ]
+},
+{
+  "id": 33,
+  "images": [],
+  "scenes": [
+    "No supe qué hacer. Un arraigado instinto de supervivencia, más poderoso que cualquier ambición científica, se apoderó de mí. Huí. Corrí a esconderme en mi cuarto, atrancando la puerta. Lloré, grité, el pánico me sacudía en oleadas, temblaba como un niño perdido en la oscuridad. Mi obstinación de los últimos meses había cobrado su precio; apenas había comido, no tenía cabeza para nada que no fuera terminar aquel proyecto. Mi cuerpo débil no pudo aguantar más, y una fiebre intensa se apoderó de mí. Creo que me desmayé.",
+    "Entre escalofríos y un terror que no disminuía desperté, salí de mi escondite varias horas después. Faltaba aún una hora para el amanecer. Caminé por el pasillo en penumbras, guardando en el fondo de mi ser la esperanza de que todo hubiera sido producto de mi fiebre, delirios de un enfermo al borde del colapso. Pero no. Allí estaba. Sentado. Me miró y emitió otro sonido gutural, ineludible, que me estremeció por completo. No podía soportar aquella infame mirada.",
+    "Exploté. Grité, vociferé, le ordené que se largara, que desapareciera, con la misma furia de quien ahuyenta del cuerpo de un inocente a un demonio. No recuerdo más de aquella noche, querido amigo. Mi cuerpo no aguantó más y me desmayé nuevamente... y esta vez, la consciencia me abandonó por completo."
+  ],
+  "choices": [
+    { "text": "Continuar", "page": 34 }
+  ]
+}
+]
 
