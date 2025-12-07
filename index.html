@@ -2,11 +2,13 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <!-- viewport-fit=cover es esencial para eliminar bordes blancos en modo inmersivo -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Frankenstein</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="app.webmanifest">
-    <meta name="theme-color" content="#2d2622">
+    <!-- El color inicial (se actualiza con JS para coincidir con el tema) -->
+    <meta name="theme-color" content="#fdf6e3">
 </head>
 <body class="theme-light">
     <div id="app-container">
@@ -23,7 +25,7 @@
                 </button>
                 
                 <button id="settings-toggle" aria-label="Ajustes">
-                    <svg class="icon-settings" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.4 12.5c0-.2.1-.4.1-.6s0-.4-.1-.6l2.1-1.7c.2-.1.2-.4.1-.6l-2-3.5c-.1-.2-.4-.3-.6-.2l-2.5 1c-.5-.4-1-.7-1.6-.9l-.4-2.7c0-.2-.2-.4-.4-.4h-4c-.2 0-.4.2-.4.4l-.4 2.7c-.6.2-1.1.5-1.6.9l-2.5-1c-.2-.1-.5 0-.6.2l-2 3.5c-.1.2 0 .5.1.6l2.1 1.7c-.1.2-.1.4-.1.6s0 .4.1.6l-2.1 1.7c-.2.1-.2.4-.1.6l2 3.5c.1.2.4.3.6.2l2.5-1c.5.4 1 .7 1.6.9l.4 2.7c0 .2.2.4.4.4h4c.2 0 .4-.2.4-.4l.4-2.7c.6-.2 1.1-.5 1.6-.9l2.5 1c.2.1.5 0 .6-.2l2-3.5c.1-.2 0-.5-.1-.6l-2.1-1.7zm-7.4 2.5c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"/></svg>
+                    <svg class="icon-settings" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.4 12.5c0-.2.1-.4.1-.6s0-.4-.1-.6l2.1-1.7c.2-.1.2-.4.1-.6l-2-3.5c-.1-.2-.4-.3-.6-.2l-2.5 1c-.5-.4-1-.7-1.6-.9l-.4-2.7c0-.2-.2-.4-.4-.4h-4c-.2 0-.4.2-.4.4l-.4 2.7c-.6.2-1.1.5-1.6.9l-2.5-1c-.2-.1-.5 0-.6.2l2-3.5c.1.2 0-.5-.1-.6l-2.1-1.7zm-7.4 2.5c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"/></svg>
                 </button>
                 
                 <!-- Menú desplegable de ajustes -->
