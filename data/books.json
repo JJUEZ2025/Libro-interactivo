@@ -6,5 +6,37 @@
     "description": "Una adaptación interactiva del clásico con decisiones y finales alternativos.",
     "cover": "images/monstruo_rostro.jpg",
     "storyFile": "stories/frankenstein.json"
+  },
+  {
+    "id": "coming-soon-1",
+    "title": "Historia en construcción I",
+    "author": "",
+    "description": "Un nuevo libro interactivo llegará pronto.",
+    "cover": "",
+    "storyFile": ""
+  },
+  {
+    "id": "coming-soon-2",
+    "title": "Historia en construcción II",
+    "author": "",
+    "description": "Próxima obra de misterio y decisiones.",
+    "cover": "",
+    "storyFile": ""
+  },
+  {
+    "id": "coming-soon-3",
+    "title": "Historia en construcción III",
+    "author": "",
+    "description": "Otro relato interactivo en desarrollo.",
+    "cover": "",
+    "storyFile": ""
+  },
+  {
+    "id": "coming-soon-4",
+    "title": "Historia en construcción IV",
+    "author": "",
+    "description": "Más historias llegarán a tu biblioteca.",
+    "cover": "",
+    "storyFile": ""
   }
 ]
