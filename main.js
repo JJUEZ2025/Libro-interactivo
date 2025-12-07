@@ -70,13 +70,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         return savedHistory ? JSON.parse(savedHistory) : null;
     }
 
-    // --- Theme Logic (MEJORADA) ---
+    // --- Theme Logic ---
     function applyTheme(themeName) {
-        // 1. Cambiar clases CSS
         document.body.classList.remove('theme-light', 'theme-sepia', 'theme-bone', 'theme-dark');
         document.body.classList.add(`theme-${themeName}`);
         
-        // 2. Actualizar Meta Theme Color (Para barra Android)
         const metaThemeColor = document.querySelector("meta[name=theme-color]");
         if (metaThemeColor && themeColors[themeName]) {
             metaThemeColor.setAttribute("content", themeColors[themeName]);
@@ -93,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         muteBtn.setAttribute('aria-label', isMuted ? 'Activar Sonido' : 'Silenciar Audio');
     }
 
-    // --- NAVEGACIÓN FILTRADA (HITOS) ---
+    // --- NAVEGACIÓN ---
     function openNav() { updateNavigationList(); navModal.classList.add('active'); }
     function closeNav() { navModal.classList.remove('active'); }
 
@@ -144,7 +142,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // --- PRE-CARGA ---
     function preloadNextImages(currentPageId) {
         const currentPage = story.find(p => p.id === currentPageId);
         if (!currentPage || !currentPage.choices) return;
@@ -255,11 +252,31 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     function toggleSettingsMenu() { settingsMenu.classList.toggle('visible'); }
+    
+    // --- FULLSCREEN LOGIC ACTUALIZADA ---
     function toggleFullscreen() {
         if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen().catch(err => console.error(err));
-        } else { document.exitFullscreen(); }
+            // SOLICITAR QUE SE OCULTE LA UI DEL SISTEMA (Botones Android)
+            document.documentElement.requestFullscreen({ navigationUI: "hide" }).catch(err => {
+                console.error("Error fullscreen:", err);
+                // Fallback simple si falla la opción navigationUI
+                document.documentElement.requestFullscreen().catch(e => console.error(e));
+            });
+        } else { 
+            document.exitFullscreen(); 
+        }
     }
+
+    // LISTENER PARA AGREGAR CLASE CSS AL BODY
+    document.addEventListener('fullscreenchange', () => {
+        if (document.fullscreenElement) {
+            document.body.classList.add('fullscreen-mode');
+            setTimeout(() => window.scrollTo(0, 0), 100);
+        } else {
+            document.body.classList.remove('fullscreen-mode');
+        }
+    });
+
     function toggleMute() {
         isMuted = !isMuted; updateMuteIcon(); saveMuteState();
         if (isMuted) stopCurrentAudio(); else playPageSound(currentStoryId);
@@ -315,8 +332,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     fullscreenBtn.addEventListener('click', toggleFullscreen);
     muteBtn.addEventListener('click', toggleMute);
     book.addEventListener('click', handleBookClick);
-
-    document.addEventListener('fullscreenchange', () => { setTimeout(() => window.scrollTo(0, 0), 50); });
 
     async function initializeApp() {
         loadPreferences();
