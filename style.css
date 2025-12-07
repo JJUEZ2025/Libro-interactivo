@@ -1,261 +1,621 @@
+/* ===========================
+   TIPOGRAFÍAS
+   =========================== */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=IM+Fell+English:ital@0;1&display=swap');
 
+/* ===========================
+   VARIABLES GLOBALS
+   =========================== */
 :root {
     /* --- PALETAS DE COLORES --- */
-    --primary-color-light: #fdf6e3; --secondary-color-light: #3a2e28; --accent-color-light: #8b5e3c; --main-bg-light: #e8e0d5;
-    --primary-color-sepia: #f4ecd8; --secondary-color-sepia: #5d4037; --accent-color-sepia: #d84315; --main-bg-sepia: #d7ccc8;
-    --primary-color-bone: #f2f0e9; --secondary-color-bone: #4a453a; --accent-color-bone: #8c857b; --main-bg-bone: #dcdbd4;
-    --primary-color-dark: #1e1e1e; --secondary-color-dark: #e0e0e0; --accent-color-dark: #ffab91; --main-bg-dark: #121212;
+    --primary-color-light: #fdf6e3;
+    --secondary-color-light: #3a2e28;
+    --accent-color-light: #8b5e3c;
+    --main-bg-light: #e8e0d5;
+
+    --primary-color-sepia: #f4ecd8;
+    --secondary-color-sepia: #5d4037;
+    --accent-color-sepia: #d84315;
+    --main-bg-sepia: #d7ccc8;
+
+    --primary-color-bone: #f2f0e9;
+    --secondary-color-bone: #4a453a;
+    --accent-color-bone: #8c857b;
+    --main-bg-bone: #dcdbd4;
+
+    --primary-color-dark: #1e1e1e;
+    --secondary-color-dark: #e0e0e0;
+    --accent-color-dark: #ffab91;
+    --main-bg-dark: #121212;
 
     --font-body: 'Cormorant Garamond', serif;
     --font-title: 'IM Fell English', serif;
-    
+
+    /* Estas se sobreescriben por clase de tema en <body> */
     --bg-color: var(--primary-color-light);
     --text-color: var(--secondary-color-light);
     --accent-color: var(--accent-color-light);
     --main-bg: var(--main-bg-light);
-    
+
     --font-size-dynamic: 1.2rem;
 }
 
-body.theme-light { --bg-color: var(--primary-color-light); --text-color: var(--secondary-color-light); --accent-color: var(--accent-color-light); --main-bg: var(--main-bg-light); }
-body.theme-sepia { --bg-color: var(--primary-color-sepia); --text-color: var(--secondary-color-sepia); --accent-color: var(--accent-color-sepia); --main-bg: var(--main-bg-sepia); }
-body.theme-bone { --bg-color: var(--primary-color-bone); --text-color: var(--secondary-color-bone); --accent-color: var(--accent-color-bone); --main-bg: var(--main-bg-bone); }
-body.theme-dark { --bg-color: var(--primary-color-dark); --text-color: var(--secondary-color-dark); --accent-color: var(--accent-color-dark); --main-bg: var(--main-bg-dark); }
+/* Temas visuales */
+body.theme-light {
+    --bg-color: var(--primary-color-light);
+    --text-color: var(--secondary-color-light);
+    --accent-color: var(--accent-color-light);
+    --main-bg: var(--main-bg-light);
+}
 
-/* --- BASE --- */
+body.theme-sepia {
+    --bg-color: var(--primary-color-sepia);
+    --text-color: var(--secondary-color-sepia);
+    --accent-color: var(--accent-color-sepia);
+    --main-bg: var(--main-bg-sepia);
+}
+
+body.theme-bone {
+    --bg-color: var(--primary-color-bone);
+    --text-color: var(--secondary-color-bone);
+    --accent-color: var(--accent-color-bone);
+    --main-bg: var(--main-bg-bone);
+}
+
+body.theme-dark {
+    --bg-color: var(--primary-color-dark);
+    --text-color: var(--secondary-color-dark);
+    --accent-color: var(--accent-color-dark);
+    --main-bg: var(--main-bg-dark);
+}
+
+/* ===========================
+   BASE
+   =========================== */
 html {
     background-color: var(--main-bg);
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 body {
-    margin: 0; padding: 0; 
-    width: 100%; 
+    margin: 0;
+    padding: 0;
+    width: 100%;
     height: 100%;
     min-height: 100dvh;
     background-color: var(--main-bg);
-    font-family: var(--font-body); color: var(--text-color);
+    font-family: var(--font-body);
+    color: var(--text-color);
     transition: background-color 0.5s ease, color 0.5s ease;
-    overflow-x: hidden; 
+    overflow-x: hidden;
 }
 
+/* Contenedor general de la app */
 #app-container {
-    width: 100%; max-width: 1200px; margin: 0 auto;
-    display: flex; flex-direction: column;
-    padding: 20px; box-sizing: border-box;
-    align-items: center; 
-    justify-content: center; 
-    min-height: 100dvh; 
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    min-height: 100dvh;
 }
 
+/* ===========================
+   HEADER / CONTROLES
+   =========================== */
 #app-header {
-    display: flex; justify-content: space-between; align-items: center;
-    width: 100%; max-width: 900px; padding-bottom: 1rem; flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    padding-bottom: 1rem;
+    flex-shrink: 0;
 }
 
 #main-title {
-    font-family: var(--font-title); font-size: 1.8rem;
-    color: var(--accent-color); margin: 0; letter-spacing: 1px;
+    font-family: var(--font-title);
+    font-size: 1.8rem;
+    color: var(--accent-color);
+    margin: 0;
+    letter-spacing: 1px;
 }
 
-#settings-controls { display: flex; gap: 0.5rem; position: relative; }
+#settings-controls {
+    display: flex;
+    gap: 0.5rem;
+    position: relative;
+}
 
 button {
-    background: transparent; border: 1px solid var(--accent-color);
-    color: var(--accent-color); border-radius: 5px; cursor: pointer;
-    display: flex; justify-content: center; align-items: center;
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: all 0.2s ease;
 }
-#settings-toggle, #fullscreen-btn, #nav-toggle { width: 40px; height: 35px; font-size: 1.2rem; }
-button:hover { background: var(--accent-color); color: var(--bg-color); }
 
-#settings-menu {
-    display: none; position: absolute; top: 110%; right: 0;
-    background-color: var(--bg-color); border: 1px solid var(--accent-color);
-    border-radius: 5px; padding: 0.5rem; z-index: 100;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+#settings-toggle,
+#fullscreen-btn,
+#nav-toggle {
+    width: 40px;
+    height: 35px;
+    font-size: 1.2rem;
 }
-#settings-menu.visible { display: flex; gap: 0.5rem; }
-#settings-menu button { width: 40px; height: 35px; }
 
-/* --- LIBRO --- */
+button:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+}
+
+/* Menú de ajustes */
+#settings-menu {
+    display: none;
+    position: absolute;
+    top: 110%;
+    right: 0;
+    background-color: var(--bg-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    padding: 0.5rem;
+    z-index: 100;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+#settings-menu.visible {
+    display: flex;
+    gap: 0.5rem;
+}
+
+#settings-menu button {
+    width: 40px;
+    height: 35px;
+}
+
+/* ===========================
+   LIBRO
+   =========================== */
 #book-container {
-    width: 100%; max-width: 900px; 
-    flex-grow: 1; 
-    display: flex; flex-direction: column;
-    position: relative; margin-bottom: 20px;
+    width: 100%;
+    max-width: 900px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 20px;
     justify-content: center;
 }
 
-#book { width: 100%; height: 100%; position: relative; display: flex; flex-direction: column; }
+#book {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
 
+/* “Tarjeta” del libro */
 #page-wrapper {
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
     background-color: var(--bg-color);
-    box-shadow: 0 10px 30px -5px rgba(0,0,0,0.2), 0 0 5px rgba(0,0,0,0.05);
-    border-radius: 6px; border: 1px solid rgba(0,0,0,0.05);
-    overflow: hidden; display: flex; flex-direction: column;
-    position: relative; opacity: 1; transform: translateX(0);
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.2),
+                0 0 5px rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    opacity: 1;
+    transform: translateX(0);
     transition: border-radius 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Textura de papel */
 #page-wrapper::before {
-    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    opacity: 0.04; pointer-events: none; z-index: 0;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
+
+/* Viñeta alrededor */
 #page-wrapper::after {
-    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none; z-index: 1;
-    background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,0.05) 100%);
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.05) 100%);
 }
 
-.page-exit { animation: slideOutLeft 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards; }
-@keyframes slideOutLeft { 0% { opacity: 1; transform: translateX(0) scale(1); } 100% { opacity: 0; transform: translateX(-30px) scale(0.95); } }
-.page-enter { animation: slideInRight 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
-@keyframes slideInRight { 0% { opacity: 0; transform: translateX(30px) scale(0.95); } 100% { opacity: 1; transform: translateX(0) scale(1); } }
+/* Animaciones de cambio de página */
+.page-exit {
+    animation: slideOutLeft 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+}
 
-/* --- CONTENIDO --- */
+@keyframes slideOutLeft {
+    0% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-30px) scale(0.95);
+    }
+}
+
+.page-enter {
+    animation: slideInRight 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes slideInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(30px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+/* ===========================
+   CONTENIDO DE PÁGINA
+   =========================== */
 .page-content {
-    position: relative; z-index: 2; padding: 0;
-    color: var(--text-color); overflow-y: auto; height: 100%;
-    scrollbar-width: thin; scrollbar-color: var(--accent-color) transparent;
-    display: flex; flex-direction: column;
+    position: relative;
+    z-index: 2;
+    padding: 0;
+    color: var(--text-color);
+    overflow-y: auto;
+    height: 100%;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-color) transparent;
+    display: flex;
+    flex-direction: column;
 }
 
 .content-centerer {
-    padding: 3rem 4rem; 
+    padding: 3rem 4rem;
     line-height: 1.8;
     font-size: clamp(1.15rem, var(--font-size-dynamic, 1.2rem), 1.65rem);
-    width: 100%; box-sizing: border-box; margin: auto 0; 
+    width: 100%;
+    box-sizing: border-box;
+    margin: auto 0;
 }
 
-.page-content p { 
-    margin-bottom: 1.5rem; 
-    text-indent: 2rem; 
-    text-align: justify; 
+.page-content p {
+    margin-bottom: 1.5rem;
+    text-indent: 2rem;
+    text-align: justify;
 }
 
 .page-content img {
-    max-width: 100%; 
-    max-height: 65vh; 
-    width: auto; 
+    max-width: 100%;
+    max-height: 65vh;
+    width: auto;
     border-radius: 2px;
-    margin: 2rem auto; 
-    display: block; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+    margin: 2rem auto;
+    display: block;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     filter: sepia(15%);
-    object-fit: contain; 
+    object-fit: contain;
 }
 
+/* Opciones de decisión */
 .choices {
-    margin: 3rem 0; display: flex; flex-direction: column;
-    gap: 1rem; align-items: center; padding-bottom: 2rem;
+    margin: 3rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    padding-bottom: 2rem;
 }
+
 .choices button {
-    width: 100%; max-width: 500px; padding: 15px 20px;
-    font-family: var(--font-body); font-size: 1.1rem; font-weight: 700;
-    background: transparent; border: 1px solid var(--accent-color);
-    color: var(--accent-color); box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    width: 100%;
+    max-width: 500px;
+    padding: 15px 20px;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 700;
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
 }
-.choices button:hover { background-color: var(--accent-color); color: var(--bg-color); transform: translateY(-2px); }
 
+.choices button:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    transform: translateY(-2px);
+}
+
+/* Número de página */
 .page-number {
-    position: relative; z-index: 2; text-align: center; padding: 1rem; 
-    font-style: italic; font-size: 0.9rem; opacity: 0.6;
-    border-top: 1px solid rgba(0,0,0,0.05); margin-top: auto; flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 1rem;
+    font-style: italic;
+    font-size: 0.9rem;
+    opacity: 0.6;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    margin-top: auto;
+    flex-shrink: 0;
 }
 
-#app-footer { width: 100%; max-width: 900px; }
+/* ===========================
+   FOOTER / PROGRESO
+   =========================== */
+#app-footer {
+    width: 100%;
+    max-width: 900px;
+}
+
 #progress-bar-container {
-    width: 100%; height: 4px; background-color: rgba(0, 0, 0, 0.1); 
-    margin-top: 15px; border-radius: 2px;
+    width: 100%;
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin-top: 15px;
+    border-radius: 2px;
 }
-#progress-bar { height: 100%; width: 0%; background-color: var(--accent-color); transition: width 0.5s ease; border-radius: 2px; }
 
-/* --- MODAL --- */
-.modal-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.5); backdrop-filter: blur(3px);
-    z-index: 1000; display: flex; justify-content: center; align-items: center;
-    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+#progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: var(--accent-color);
+    transition: width 0.5s ease;
+    border-radius: 2px;
 }
-.modal-overlay.active { opacity: 1; pointer-events: auto; }
+
+/* ===========================
+   MODAL DE NAVEGACIÓN
+   =========================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 .modal-content {
-    width: 90%; max-width: 500px; max-height: 80vh;
-    background-color: var(--bg-color); color: var(--text-color);
-    border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    display: flex; flex-direction: column;
-    transform: translateY(20px); transition: transform 0.3s ease;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
     border: 1px solid var(--accent-color);
 }
-.modal-overlay.active .modal-content { transform: translateY(0); }
-.modal-header { padding: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
-.modal-header h2 { margin: 0; font-family: var(--font-title); color: var(--accent-color); }
-#nav-close { font-size: 1.2rem; border: none; }
-.modal-body { padding: 1.5rem; overflow-y: auto; }
-.danger-btn { width: 100%; padding: 12px; background-color: rgba(200, 50, 50, 0.1); color: #c62828; border: 1px solid #c62828; font-family: var(--font-body); font-weight: bold; margin-bottom: 1.5rem; }
-.history-list-container h3 { margin-top: 0; font-size: 1rem; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; }
-#history-list { list-style: none; padding: 0; margin: 0; position: relative; }
-#history-list::before { content: ''; position: absolute; top: 0; bottom: 0; left: 7px; width: 2px; background-color: var(--accent-color); opacity: 0.3; }
-.history-item { position: relative; padding-left: 25px; margin-bottom: 15px; cursor: pointer; transition: opacity 0.2s; }
-.history-item::before { content: ''; position: absolute; left: 0; top: 6px; width: 16px; height: 16px; border-radius: 50%; background-color: var(--bg-color); border: 2px solid var(--accent-color); z-index: 1; }
-.history-item.decision::before { border-radius: 2px; border-width: 3px; background-color: var(--accent-color); } 
-.history-title { font-weight: bold; display: block; font-size: 1.1rem; }
-.history-tag { font-size: 0.7rem; background: var(--accent-color); color: var(--bg-color); padding: 2px 6px; border-radius: 4px; margin-left: 5px; vertical-align: middle; }
 
-/* --- MEDIA QUERIES (MÓVIL) --- */
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-family: var(--font-title);
+    color: var(--accent-color);
+}
+
+#nav-close {
+    font-size: 1.2rem;
+    border: none;
+}
+
+.modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+.danger-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: rgba(200, 50, 50, 0.1);
+    color: #c62828;
+    border: 1px solid #c62828;
+    font-family: var(--font-body);
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.history-list-container h3 {
+    margin-top: 0;
+    font-size: 1rem;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+#history-list::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 7px;
+    width: 2px;
+    background-color: var(--accent-color);
+    opacity: 0.3;
+}
+
+.history-item {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.history-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--bg-color);
+    border: 2px solid var(--accent-color);
+    z-index: 1;
+}
+
+.history-item.decision::before {
+    border-radius: 2px;
+    border-width: 3px;
+    background-color: var(--accent-color);
+}
+
+.history-title {
+    font-weight: bold;
+    display: block;
+    font-size: 1.1rem;
+}
+
+.history-tag {
+    font-size: 0.7rem;
+    background: var(--accent-color);
+    color: var(--bg-color);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+/* ===========================
+   MEDIA QUERIES (TABLET / MÓVIL)
+   =========================== */
 @media (max-width: 900px) {
-    #app-container { padding: 10px; }
-    .content-centerer { padding: 2rem 2rem; }
+    #app-container {
+        padding: 10px;
+    }
+
+    .content-centerer {
+        padding: 2rem 2rem;
+    }
 }
 
 @media (max-width: 600px) {
-    #app-container { padding: 5px; }
-    #book-container { margin-bottom: 10px; }
-    
-    .content-centerer { 
-        padding: 1.5rem 1.5rem; 
-        font-size: 1.1rem; 
-        margin: 0; 
+    #app-container {
+        padding: 5px;
     }
-    
-    .page-content p { 
-        text-indent: 0; 
+
+    #book-container {
+        margin-bottom: 10px;
     }
-    
+
+    .content-centerer {
+        padding: 1.5rem 1.5rem;
+        font-size: 1.1rem;
+        margin: 0;
+    }
+
+    .page-content p {
+        text-indent: 0;
+    }
+
     .page-content img {
-        margin: 1.5rem 0; 
-        max-height: 70vh; 
-        width: 100%; 
-        object-fit: contain; 
+        margin: 1.5rem 0;
+        max-height: 70vh;
+        width: 100%;
+        object-fit: contain;
     }
-    
-    #app-header { padding-bottom: 0.5rem; }
-    #main-title { font-size: 1.4rem; }
+
+    #app-header {
+        padding-bottom: 0.5rem;
+    }
+
+    #main-title {
+        font-size: 1.4rem;
+    }
 }
 
-/* === CORRECCIÓN DEFINITIVA PANTALLA COMPLETA === */
+/* ===========================
+   FULLSCREEN / ANDROID FIX
+   =========================== */
 
-/* Backdrop: El "fondo" detrás de la app debe ser el color del tema */
-:fullscreen::backdrop {
+/* Backdrop detrás del elemento en pantalla completa */
+:fullscreen::backdrop,
+:-webkit-full-screen::backdrop {
     background-color: var(--bg-color);
 }
 
-/* Cuando JS añade la clase fullscreen-mode */
+/* Cuando JS añada la clase en <html> */
+html.fullscreen-root {
+    background-color: var(--bg-color);
+}
+
+/* Modo pantalla completa dentro del body */
 body.fullscreen-mode {
     background-color: var(--bg-color);
     width: 100vw;
     height: 100vh;
-    overflow: hidden; /* Evita cualquier barra de scroll externa */
+    overflow: hidden; /* sin scroll externo */
 }
 
-/* El contenedor principal se convierte en el "viewport" absoluto */
+/* El contenedor principal se convierte en viewport absoluto */
 body.fullscreen-mode #app-container {
-    position: fixed; /* O static con 100% size, pero fixed es más seguro contra rebotes */
-    top: 0; left: 0; right: 0; bottom: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
     height: 100%;
     padding: 0;
@@ -263,34 +623,37 @@ body.fullscreen-mode #app-container {
     max-width: none;
     z-index: 9999;
     background-color: var(--bg-color);
-    
-    /* Centrado */
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-/* Ocultar elementos sobrantes */
-body.fullscreen-mode #app-header, 
+/* Ocultar elementos que sobran en pantalla completa */
+body.fullscreen-mode #app-header,
 body.fullscreen-mode #app-footer {
     display: none !important;
 }
 
-/* El libro ocupa todo, respetando "safe areas" (notch) con padding interno */
+/* El libro ocupa toda la altura disponible */
 body.fullscreen-mode #book-container {
     width: 100%;
     height: 100%;
     margin: 0;
-    max-width: 800px; /* Límite de lectura cómodo */
-    
-    /* El relleno interno asegura que el texto no toque bordes curvos o notch */
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
+    max-width: 800px;
+
+    /* En fullscreen queremos que el contenido
+       llegue hasta abajo, sin banda extra */
+    padding-top: 0;
+    padding-bottom: 0;
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
 }
 
+/* La tarjeta se vuelve plana, sin sombras ni bordes
+   para que el color coincida al 100% con el fondo
+   y no se note ninguna franja inferior */
 body.fullscreen-mode #page-wrapper {
     width: 100%;
     height: 100%;
@@ -299,9 +662,25 @@ body.fullscreen-mode #page-wrapper {
     box-shadow: none;
 }
 
+/* Quitamos textura y viñeta en fullscreen
+   para evitar diferencias de tono respecto
+   a la barra del sistema / meta theme-color */
+body.fullscreen-mode #page-wrapper::before,
+body.fullscreen-mode #page-wrapper::after {
+    display: none;
+}
+
+/* Ajuste de padding interno en fullscreen */
 body.fullscreen-mode .content-centerer {
     padding: 2rem 1.5rem;
     max-width: 100%;
 }
 
-svg { fill: currentColor; width: 20px; height: 20px; }
+/* ===========================
+   SVG GENERAL
+   =========================== */
+svg {
+    fill: currentColor;
+    width: 20px;
+    height: 20px;
+}
