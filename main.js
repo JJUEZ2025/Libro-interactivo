@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Diccionario de colores para la barra de Android (Meta Theme Color)
     const themeColors = {
-        'light': '#fdf6e3', // Color de la página, NO de la mesa
+        'light': '#fdf6e3', // Color de la página
         'sepia': '#f4ecd8',
         'bone': '#f2f0e9',
         'dark': '#1a1a1a'
