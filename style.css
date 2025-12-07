@@ -31,13 +31,15 @@ body.theme-dark { --bg-color: var(--primary-color-dark); --text-color: var(--sec
 
 /* --- BASE --- */
 body, html {
-    margin: 0; padding: 0; width: 100%; height: 100%;
-    /* min-height para asegurar cobertura en móviles */
+    margin: 0; padding: 0; 
+    width: 100%; 
+    height: 100%;
+    /* Aseguramos que no haya scroll horizontal que cause bordes blancos */
+    overflow-x: hidden; 
     min-height: 100dvh;
     background-color: var(--main-bg);
     font-family: var(--font-body); color: var(--text-color);
     transition: background-color 0.5s ease, color 0.5s ease;
-    overflow-x: hidden; 
     overscroll-behavior: none; 
 }
 
@@ -46,13 +48,16 @@ body, html {
     display: flex; flex-direction: column;
     padding: 20px; box-sizing: border-box;
     align-items: center; 
-    height: 100dvh; 
-    min-height: 100%;
+    /* justify-content center asegura que si sobra espacio, quede centrado verticalmente */
+    justify-content: center; 
+    min-height: 100dvh; 
 }
 
 #app-header {
     display: flex; justify-content: space-between; align-items: center;
     width: 100%; max-width: 900px; padding-bottom: 1rem; flex-shrink: 0;
+    /* Alineación superior por defecto cuando no es fullscreen */
+    margin-top: 0;
 }
 
 #main-title {
@@ -83,11 +88,14 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
 /* --- LIBRO --- */
 #book-container {
     width: 100%; max-width: 900px; 
-    flex-grow: 1; display: flex; flex-direction: column;
+    /* Flex-grow permite que ocupe el espacio disponible, pero en fullscreen controlaremos la altura */
+    flex-grow: 1; 
+    display: flex; flex-direction: column;
     position: relative; margin-bottom: 20px;
+    justify-content: center; /* Centrado interno */
 }
 
-#book { width: 100%; height: 100%; position: relative; }
+#book { width: 100%; height: 100%; position: relative; display: flex; flex-direction: column; }
 
 #page-wrapper {
     width: 100%; height: 100%;
@@ -138,7 +146,7 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
     text-align: justify; 
 }
 
-/* --- IMÁGENES (Estilo base escritorio) --- */
+/* --- IMÁGENES --- */
 .page-content img {
     max-width: 100%; 
     max-height: 65vh; 
@@ -228,52 +236,78 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
         text-indent: 0; 
     }
     
-    /* === CORRECCIÓN APLICADA: IMÁGENES EN MÓVIL === */
+    /* IMÁGENES MÓVIL CORREGIDO */
     .page-content img {
-        margin: 1.5rem 0; /* Centrado vertical, elimina el auto horizontal */
-        max-height: 70vh; /* Permite que la imagen sea más alta (antes 45vh) */
-        width: 100%; /* Fuerza a ocupar todo el ancho disponible */
-        object-fit: contain; /* Asegura que la imagen completa sea visible */
+        margin: 1.5rem 0; 
+        max-height: 70vh; 
+        width: 100%; 
+        object-fit: contain; 
     }
     
     #app-header { padding-bottom: 0.5rem; }
     #main-title { font-size: 1.4rem; }
 }
 
-/* === CORRECCIÓN APLICADA: PANTALLA COMPLETA INMERSIVA (ANDROID) === */
+/* --- PANTALLA COMPLETA INMERSIVA (ANDROID) CORREGIDA --- */
 
-/* 1. Backdrop: Elimina el fondo gris por defecto de Android/Chrome */
 :fullscreen::backdrop {
     background-color: var(--bg-color);
 }
 
-/* 2. Reglas generales de Fullscreen */
 :fullscreen {
     background-color: var(--bg-color);
-    overflow-y: auto;
+    overflow-y: hidden; /* Evita doble scroll */
 }
 
 :fullscreen #app-container {
-    padding: 0; max-width: 100%; height: 100%;
-    background-color: var(--bg-color); 
-    /* 3. Padding inferior para salvar la barra de gestos */
-    padding-bottom: env(safe-area-inset-bottom); 
+    /* CORRECCIÓN 1: Forzar dimensiones exactas */
+    width: 100vw;
+    height: 100dvh;
+    max-width: 100vw;
+    margin: 0;
+    
+    /* CORRECCIÓN 2: Centrado vertical absoluto */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* ESTO centra verticalmente */
+    align-items: center;     /* ESTO centra horizontalmente */
+    
+    /* Pequeño margen seguro para bordes de pantalla curva */
+    padding: 0 5px; 
+    padding-bottom: env(safe-area-inset-bottom);
+    box-sizing: border-box;
 }
 
 :fullscreen body {
     background-color: var(--bg-color);
+    overflow: hidden; /* Importante para evitar franjas blancas por scroll */
 }
 
 :fullscreen #app-header, :fullscreen #app-footer { display: none; }
+
 :fullscreen #book-container { 
-    max-width: 100%; margin: 0; height: 100%; 
-    margin-bottom: 0; 
-}
-:fullscreen #page-wrapper { 
-    border-radius: 0; border: none; box-shadow: none; 
-}
-:fullscreen .content-centerer { 
-    padding: 3rem 2rem; max-width: 800px; align-self: center; 
+    width: 100%;
+    max-width: 800px; /* Ancho máximo de lectura cómodo */
+    height: 100%; /* Ocupar toda la altura disponible */
+    margin: 0; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-svg { fill: currentColor; width: 20px; height: 20px; }
+:fullscreen #page-wrapper { 
+    border-radius: 0; 
+    border: none; 
+    box-shadow: none;
+    /* Asegurar que ocupe todo el espacio asignado */
+    height: 100%; 
+    width: 100%;
+}
+
+:fullscreen .content-centerer { 
+    /* Ajuste de lectura en fullscreen */
+    padding: 2rem 1.5rem; 
+    width: 100%;
+    max-width: 100%;
+    align-self: center; 
+}
