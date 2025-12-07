@@ -18,18 +18,15 @@
     --font-size-dynamic: 1.2rem;
 }
 
-/* Asignación de Temas */
 body.theme-light { --bg-color: var(--primary-color-light); --text-color: var(--secondary-color-light); --accent-color: var(--accent-color-light); --main-bg: var(--main-bg-light); }
 body.theme-sepia { --bg-color: var(--primary-color-sepia); --text-color: var(--secondary-color-sepia); --accent-color: var(--accent-color-sepia); --main-bg: var(--main-bg-sepia); }
 body.theme-bone { --bg-color: var(--primary-color-bone); --text-color: var(--secondary-color-bone); --accent-color: var(--accent-color-bone); --main-bg: var(--main-bg-bone); }
 body.theme-dark { --bg-color: var(--primary-color-dark); --text-color: var(--secondary-color-dark); --accent-color: var(--accent-color-dark); --main-bg: var(--main-bg-dark); }
 
 /* --- BASE --- */
-/* IMPORTANTE: El color de fondo debe estar en HTML para evitar bordes blancos en el overscroll o notch */
 html {
     background-color: var(--main-bg);
-    height: 100%;
-    width: 100%;
+    width: 100%; height: 100%;
 }
 
 body {
@@ -37,7 +34,7 @@ body {
     width: 100%; 
     height: 100%;
     min-height: 100dvh;
-    background-color: var(--main-bg); /* Respaldo */
+    background-color: var(--main-bg);
     font-family: var(--font-body); color: var(--text-color);
     transition: background-color 0.5s ease, color 0.5s ease;
     overflow-x: hidden; 
@@ -48,7 +45,6 @@ body {
     display: flex; flex-direction: column;
     padding: 20px; box-sizing: border-box;
     align-items: center; 
-    /* Centrado vertical por defecto */
     justify-content: center; 
     min-height: 100dvh; 
 }
@@ -104,7 +100,6 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
     transition: border-radius 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Textura */
 #page-wrapper::before {
     content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     opacity: 0.04; pointer-events: none; z-index: 0;
@@ -242,68 +237,69 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
     #main-title { font-size: 1.4rem; }
 }
 
-/* === CORRECCIÓN DEFINITIVA: PANTALLA COMPLETA === */
+/* === CORRECCIÓN DEFINITIVA PANTALLA COMPLETA === */
 
-/* 1. Inundar el fondo raíz */
-:fullscreen {
+/* Backdrop: El "fondo" detrás de la app debe ser el color del tema */
+:fullscreen::backdrop {
     background-color: var(--bg-color);
 }
 
-/* 2. El body ocupa todo, sin scroll externo */
-:fullscreen body {
+/* Cuando JS añade la clase fullscreen-mode */
+body.fullscreen-mode {
     background-color: var(--bg-color);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Evita cualquier barra de scroll externa */
+}
+
+/* El contenedor principal se convierte en el "viewport" absoluto */
+body.fullscreen-mode #app-container {
+    position: fixed; /* O static con 100% size, pero fixed es más seguro contra rebotes */
+    top: 0; left: 0; right: 0; bottom: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    /* Usar flex en el body asegura que el único hijo (#app-container) esté centrado pase lo que pase */
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    z-index: 9999;
+    background-color: var(--bg-color);
+    
+    /* Centrado */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-/* 3. Contenedor principal sin posición fija */
-:fullscreen #app-container {
-    position: static; /* Volvemos al flujo normal */
+/* Ocultar elementos sobrantes */
+body.fullscreen-mode #app-header, 
+body.fullscreen-mode #app-footer {
+    display: none !important;
+}
+
+/* El libro ocupa todo, respetando "safe areas" (notch) con padding interno */
+body.fullscreen-mode #book-container {
     width: 100%;
     height: 100%;
-    max-width: none;
-    padding: 0;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-:fullscreen #app-header, :fullscreen #app-footer { 
-    display: none !important; 
-}
-
-/* 4. El libro se adapta al espacio */
-:fullscreen #book-container {
-    height: 100%;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 800px; /* Límite de lectura cómodo */
     
-    /* 5. EL TRUCO: Padding interno para zonas seguras */
-    /* Esto empuja el TEXTO hacia adentro, pero el FONDO (que viene del body) sigue detrás */
-    /* Así no queda un borde blanco/negro arriba */
+    /* El relleno interno asegura que el texto no toque bordes curvos o notch */
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
 }
 
-:fullscreen #page-wrapper {
+body.fullscreen-mode #page-wrapper {
+    width: 100%;
+    height: 100%;
     border-radius: 0;
     border: none;
     box-shadow: none;
-    height: 100%;
-    width: 100%;
-    background-color: transparent; /* Transparente para usar el fondo del root si es necesario */
 }
 
-:fullscreen .content-centerer {
+body.fullscreen-mode .content-centerer {
     padding: 2rem 1.5rem;
     max-width: 100%;
 }
