@@ -2,13 +2,9 @@
 
 :root {
     /* --- PALETAS DE COLORES --- */
-    /* CLARO */
     --primary-color-light: #fdf6e3; --secondary-color-light: #3a2e28; --accent-color-light: #8b5e3c; --main-bg-light: #e8e0d5;
-    /* SEPIA */
     --primary-color-sepia: #f4ecd8; --secondary-color-sepia: #5d4037; --accent-color-sepia: #d84315; --main-bg-sepia: #d7ccc8;
-    /* HUESO */
     --primary-color-bone: #f2f0e9; --secondary-color-bone: #4a453a; --accent-color-bone: #8c857b; --main-bg-bone: #dcdbd4;
-    /* OSCURO */
     --primary-color-dark: #1e1e1e; --secondary-color-dark: #e0e0e0; --accent-color-dark: #ffab91; --main-bg-dark: #121212;
 
     --font-body: 'Cormorant Garamond', serif;
@@ -19,27 +15,32 @@
     --accent-color: var(--accent-color-light);
     --main-bg: var(--main-bg-light);
     
-    /* Variable para tamaño dinámico */
     --font-size-dynamic: 1.2rem;
 }
 
-/* Asignación */
+/* Asignación de Temas */
 body.theme-light { --bg-color: var(--primary-color-light); --text-color: var(--secondary-color-light); --accent-color: var(--accent-color-light); --main-bg: var(--main-bg-light); }
 body.theme-sepia { --bg-color: var(--primary-color-sepia); --text-color: var(--secondary-color-sepia); --accent-color: var(--accent-color-sepia); --main-bg: var(--main-bg-sepia); }
 body.theme-bone { --bg-color: var(--primary-color-bone); --text-color: var(--secondary-color-bone); --accent-color: var(--accent-color-bone); --main-bg: var(--main-bg-bone); }
 body.theme-dark { --bg-color: var(--primary-color-dark); --text-color: var(--secondary-color-dark); --accent-color: var(--accent-color-dark); --main-bg: var(--main-bg-dark); }
 
 /* --- BASE --- */
-body, html {
+/* IMPORTANTE: El color de fondo debe estar en HTML para evitar bordes blancos en el overscroll o notch */
+html {
+    background-color: var(--main-bg);
+    height: 100%;
+    width: 100%;
+}
+
+body {
     margin: 0; padding: 0; 
     width: 100%; 
     height: 100%;
-    overflow-x: hidden; 
     min-height: 100dvh;
-    background-color: var(--main-bg);
+    background-color: var(--main-bg); /* Respaldo */
     font-family: var(--font-body); color: var(--text-color);
     transition: background-color 0.5s ease, color 0.5s ease;
-    overscroll-behavior: none; 
+    overflow-x: hidden; 
 }
 
 #app-container {
@@ -47,6 +48,7 @@ body, html {
     display: flex; flex-direction: column;
     padding: 20px; box-sizing: border-box;
     align-items: center; 
+    /* Centrado vertical por defecto */
     justify-content: center; 
     min-height: 100dvh; 
 }
@@ -54,7 +56,6 @@ body, html {
 #app-header {
     display: flex; justify-content: space-between; align-items: center;
     width: 100%; max-width: 900px; padding-bottom: 1rem; flex-shrink: 0;
-    margin-top: 0;
 }
 
 #main-title {
@@ -103,6 +104,7 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
     transition: border-radius 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Textura */
 #page-wrapper::before {
     content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     opacity: 0.04; pointer-events: none; z-index: 0;
@@ -242,51 +244,50 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
 
 /* === CORRECCIÓN DEFINITIVA: PANTALLA COMPLETA === */
 
-:fullscreen::backdrop {
+/* 1. Inundar el fondo raíz */
+:fullscreen {
     background-color: var(--bg-color);
 }
 
+/* 2. El body ocupa todo, sin scroll externo */
 :fullscreen body {
-    overflow: hidden; /* Bloquear scroll del body para evitar rebotes */
+    background-color: var(--bg-color);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* Usar flex en el body asegura que el único hijo (#app-container) esté centrado pase lo que pase */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* REGLA MAESTRA: Fija el contenedor a la pantalla física */
+/* 3. Contenedor principal sin posición fija */
 :fullscreen #app-container {
-    position: fixed; /* Esto evita el 'floating' hacia arriba */
-    top: 0; 
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
+    position: static; /* Volvemos al flujo normal */
+    width: 100%;
+    height: 100%;
+    max-width: none;
     padding: 0;
-    
-    /* Centrado absoluto */
+    margin: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    
-    background-color: var(--bg-color);
-    z-index: 9999;
 }
 
 :fullscreen #app-header, :fullscreen #app-footer { 
     display: none !important; 
 }
 
+/* 4. El libro se adapta al espacio */
 :fullscreen #book-container {
-    /* Ocupar el máximo espacio posible respetando márgenes seguros */
-    width: 100%;
     height: 100%;
-    max-width: 800px; /* Limite para que no se vea eterno en tablets */
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
     
-    /* Padding para 'Safe Areas' (Isla dinámica, notch, barra inferior) */
+    /* 5. EL TRUCO: Padding interno para zonas seguras */
+    /* Esto empuja el TEXTO hacia adentro, pero el FONDO (que viene del body) sigue detrás */
+    /* Así no queda un borde blanco/negro arriba */
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
     padding-left: env(safe-area-inset-left);
@@ -299,12 +300,12 @@ button:hover { background: var(--accent-color); color: var(--bg-color); }
     box-shadow: none;
     height: 100%;
     width: 100%;
+    background-color: transparent; /* Transparente para usar el fondo del root si es necesario */
 }
 
 :fullscreen .content-centerer {
     padding: 2rem 1.5rem;
     max-width: 100%;
-    align-self: center;
 }
 
 svg { fill: currentColor; width: 20px; height: 20px; }
