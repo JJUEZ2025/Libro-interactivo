@@ -1,0 +1,76 @@
+[
+  {
+    "id": "inicio",
+    "bgMusic": "jazz_bukowski.mp3",
+    "effect": "bluebird_pass",
+    "page": 1,
+    "scenes": [
+      "hay un pájaro azul en mi corazón que\nquiere salir",
+      "pero soy duro con él,\nle digo quédate ahí dentro, no voy\na permitir que nadie\nte vea."
+    ],
+    "choices": [
+      {
+        "text": "Pero yo le echo whisky encima...",
+        "page": "vicios"
+      }
+    ]
+  },
+  {
+    "id": "vicios",
+    "bgMusic": "jazz_bukowski.mp3",
+    "effect": "smoke_overlay, bluebird_pass",
+    "page": 2,
+    "scenes": [
+      "hay un pájaro azul en mi corazón que\nquiere salir",
+      "pero yo le echo whisky encima y me trago\nel humo de los cigarrillos,",
+      "y las putas y los camareros\ny los dependientes de ultramarinos\nnunca se dan cuenta\nde que está ahí dentro."
+    ],
+    "choices": [
+      {
+        "text": "Sólo le dejo salir por la noche...",
+        "page": "noche"
+      }
+    ]
+  },
+  {
+    "id": "noche",
+    "bgMusic": "jazz_bukowski.mp3",
+    "effect": "rain_subtle, bluebird_pass",
+    "page": 3,
+    "scenes": [
+      "hay un <span class='blue-highlight'>pájaro azul</span> en mi corazón\nque quiere salir\npero soy demasiado listo,",
+      "sólo le dejo salir\na veces por la noche\ncuando todo el mundo duerme.",
+      "le digo ya sé que estás ahí,\nno te pongas\ntriste.",
+      "luego lo vuelvo a introducir,\ny él canta un poquito\nahí dentro, no le he dejado\nmorir del todo",
+      "y dormimos juntos\nasí\ncon nuestro\npacto secreto",
+      "y es tan tierno como\npara hacer llorar\na un hombre, pero yo no\nlloro,",
+      "¿lloras tú?"
+    ],
+    "choices": [
+      {
+        "text": "Sobre el autor",
+        "page": "biografia"
+      }
+    ]
+  },
+  {
+    "id": "biografia",
+    "bgMusic": "jazz_bukowski.mp3",
+    "effect": "bluebird_pass",
+    "page": 4,
+    "forceShowChoices": true,
+    "images": [],
+    "scenes": [
+      "<img src='images/bukowski_retrato.jpg' class='bio-portrait' alt='Charles Bukowski'>",
+      "<strong>Charles Bukowski (1920-1994)</strong>",
+      "Escritor estadounidense y símbolo del 'realismo sucio', conocido por su vida de excesos y su dura fachada ante el mundo.",
+      "'El Pájaro Azul' (1992) es quizás su confesión más honesta: un vistazo a la vulnerabilidad y la belleza que mantuvo cautivas en su interior para sobrevivir a un mundo hostil."
+    ],
+    "choices": [
+      {
+        "text": "Volver a la biblioteca",
+        "page": -1
+      }
+    ]
+  }
+]

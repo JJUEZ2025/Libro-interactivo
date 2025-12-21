@@ -1,0 +1,33 @@
+/* =========================
+   ESTILOS DEL LIBRO: PÁJARO AZUL
+   ========================= */
+.blue-highlight {
+    color: #3498db;
+    font-weight: bold;
+    display: inline-block;
+    animation: heartbeat 3s infinite ease-in-out;
+}
+
+body.theme-sepia .blue-highlight { color: #2980b9; }
+body.theme-dark .blue-highlight { color: #5dade2; }
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* --- NUEVO: Estilo para la foto del autor (Biografía) --- */
+.bio-portrait {
+    width: 140px !important; /* Forzamos tamaño pequeño */
+    height: 140px !important;
+    border-radius: 50% !important; /* Círculo perfecto tipo perfil */
+    object-fit: cover !important; /* Evita que la foto se deforme */
+    margin: 1rem auto 1.5rem auto !important; /* Centrado */
+    border: 3px solid rgba(139, 94, 60, 0.3) !important; /* Marco sutil */
+    display: block;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+body.theme-dark .bio-portrait {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}

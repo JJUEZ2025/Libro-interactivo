@@ -1,0 +1,44 @@
+/* =========================
+   EFECTO: HUMO (VICIOS)
+   ========================= */
+
+.smoke-particle {
+    position: absolute;
+    /* Cambiamos a un humo grisáceo/blanco sutil, más realista para cigarrillos */
+    background: radial-gradient(circle, rgba(150, 150, 150, 0.4) 0%, rgba(200, 200, 200, 0.1) 50%, rgba(255, 255, 255, 0) 80%);
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    bottom: -60px;
+    /* Blur alto para que parezca gas y no círculos sólidos */
+    filter: blur(20px);
+    opacity: 0;
+    animation: smokeFloat 12s infinite ease-out;
+}
+
+@keyframes smokeFloat {
+    0% {
+        transform: translateY(0) scale(0.5) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6; /* Punto de máxima visibilidad */
+    }
+    40% {
+        transform: translateY(-40vh) scale(1.5) translateX(-20px);
+        opacity: 0.4;
+    }
+    70% {
+        transform: translateY(-80vh) scale(2.5) translateX(20px);
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateY(-120vh) scale(4) translateX(-10px);
+        opacity: 0;
+    }
+}
+
+/* Modo oscuro: humo un poco más visible para contrastar */
+body.theme-dark .smoke-particle {
+    background: radial-gradient(circle, rgba(200, 200, 200, 0.2) 0%, rgba(100, 100, 100, 0.05) 60%, rgba(0, 0, 0, 0) 80%);
+}

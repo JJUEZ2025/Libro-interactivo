@@ -1,0 +1,42 @@
+[
+  {
+    "id": "frankenstein",
+    "title": "Frankenstein",
+    "author": "Mary Shelley (adaptación)",
+    "description": "Una adaptación interactiva del clásico con decisiones y finales alternativos.",
+    "cover": "images/monstruo_rostro.jpg",
+    "storyFile": "stories/frankenstein.json"
+  },
+  {
+    "id": "pajaro-azul",
+    "title": "Pájaro Azul",
+    "author": "Charles Bukowski",
+    "description": "Hay un pájaro azul en mi corazón que quiere salir...",
+    "cover": "images/bukowski_pajaroazul.png",
+    "storyFile": "stories/pajaro_azul.json"
+  },
+  {
+    "id": "jorge-luis-borges-remordimiento",
+    "title": "El remordimiento",
+    "author": "Jorge Luis Borges",
+    "description": "He cometido el peor de los pecados que un hombre puede cometer.",
+    "cover": "images/borges_remordimiento_portada.jpg",
+    "storyFile": "stories/pecado_borges.json"
+  },
+  {
+    "id": "coming-soon-3",
+    "title": "Historia en construcción III",
+    "author": "",
+    "description": "Otro relato interactivo en desarrollo.",
+    "cover": "",
+    "storyFile": ""
+  },
+  {
+    "id": "coming-soon-4",
+    "title": "Historia en construcción IV",
+    "author": "",
+    "description": "Más historias llegarán a tu biblioteca.",
+    "cover": "",
+    "storyFile": ""
+  }
+]

@@ -1,0 +1,26 @@
+/* =========================
+   EFECTO: LLUVIA (LÁGRIMAS)
+   ========================= */
+
+.rain-drop {
+    position: absolute;
+    background: rgba(52, 152, 219, 0.5); /* Un poco más transparente */
+    width: 2px;
+    height: 25px; /* Gotas más largas para estilizar */
+    top: -50px;
+    /* MÁS LENTO: Base de 3s en lugar de 1.5s */
+    animation: rainFall 3s linear infinite;
+}
+
+@keyframes rainFall {
+    to { transform: translateY(110vh); }
+}
+
+/* Variación para profundidad */
+.rain-drop:nth-child(even) {
+    width: 1px;
+    height: 15px;
+    opacity: 0.3;
+    background: rgba(100, 100, 120, 0.4);
+    animation-duration: 4.5s; /* Las gotas de fondo caen aún más lento */
+}

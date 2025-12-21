@@ -1,0 +1,74 @@
+[
+  {
+    "id": "pecado",
+    "page": 1,
+    "audio": "borges_el_remordimiento.mp3",
+    "audioText": "Escucha el poema desde la voz de su autor:",
+    "karaokeLines": [
+      { 
+        "text": "He cometido el peor de los pecados<br>que un hombre puede cometer. No he sido feliz.", 
+        "start": 0, 
+        "end": 6.5 
+      },
+      { 
+        "text": "Que los glaciares del olvido<br>me arrastren y me pierdan, despiadados.", 
+        "start": 6.5, 
+        "end": 12.0 
+      },
+      { 
+        "text": "Mis padres me engendraron para el juego<br>arriesgado y hermoso de la vida,", 
+        "start": 12.0, 
+        "end": 16.5 
+      },
+      { 
+        "text": "para la tierra, el agua, el aire, el fuego.", 
+        "start": 16.5, 
+        "end": 20.5 
+      },
+      { 
+        "text": "Los defraudé. No fui feliz. Cumplida<br>no fue su joven voluntad.", 
+        "start": 20.5, 
+        "end": 27.0 
+      },
+      { 
+        "text": "Mi mente se aplicó a las simétricas porfías<br>del arte, que entretejen naderías.", 
+        "start": 27.0, 
+        "end": 34.0 
+      },
+      { 
+        "text": "Me legaron valor. No fui valiente.", 
+        "start": 33.0, 
+        "end": 36.0 
+      },
+      { 
+        "text": "No me abandona. Siempre está a mi lado<br>La sombra de haber sido un desdichado.", 
+        "start": 36.0, 
+        "end": 44.0 
+      }
+    ],
+    "choices": [
+      {
+        "text": "Sobre el autor",
+        "page": "biografia"
+      }
+    ]
+  },
+  {
+    "id": "biografia",
+    "page": 2,
+    "forceShowChoices": true,
+    "images": [],
+    "scenes": [
+      "<img src='images/biografia_borges.png' class='bio-portrait' alt='jorge borges'>",
+      "Fue uno de los escritores más influyentes de la literatura argentina y universal del siglo XX. Lector apasionado desde la infancia, dedicó su vida a los libros, las palabras y las ideas, incluso cuando la ceguera fue apagando su vista.",
+"\"El remordimiento\" (1975) fue escrito poco después de la muerte de su madre, Leonor Acevedo, una presencia decisiva en su vida personal y literaria. En este poema, Borges se aparta del juego intelectual que suele caracterizar su obra y se muestra vulnerable: un Borges humano, que reflexiona sobre su vida y se culpa por no haber sido feliz."
+
+    ],
+    "choices": [
+      {
+        "text": "Volver a la biblioteca",
+        "page": -1
+      }
+    ]
+  }
+]
